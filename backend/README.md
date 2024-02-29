@@ -1,0 +1,1 @@
+Saranno implementati tutti i web service per l'applicazione
