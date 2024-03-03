@@ -1,19 +1,32 @@
 //<script type="module" src="../dto/LoginDTO"></script>
 
 import {LoginDTO} from '../dto/loginDTO.tsx';
+import { ResponseDTO } from '../dto/responseDTO.tsx';
 
 export class AuthenticationBO {
 
     constructor() {}
 
-    doLogin(login: LoginDTO) : boolean {
+    // richiama il web service per il login
+    doLogin(login: LoginDTO) : ResponseDTO {
 
-        console.log("start doLogin");
-            console.log(login.userName);
-            console.log(login.password);
-        console.log("end doLogin");
+        let result = new ResponseDTO();
+        try {
+            console.log("start doLogin");
+                console.log(login.userName);
+                console.log(login.password);
+            console.log("end doLogin");
+
+            throw new TypeError('Error message');
+
+        } catch (error) {
+            result.errorCode = 1;
+            if (error != null && error != undefined) { 
+                result.errorMessage = JSON.stringify(error, Object.getOwnPropertyNames(error));
+            }
+        }
     
-        return false;
+        return result;
     }    
 }
 
