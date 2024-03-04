@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 
 const defaultTheme = createTheme();
 
@@ -32,14 +33,12 @@ function Login() {
                     <CssBaseline />
                     <Box
                         sx={{
-                            marginTop: 8,
                             display: 'flex',
                             flexDirection: 'column',
-                            alignItems: 'center',
+                            alignItems: 'center'
                         }}>
                         <Box
                             sx={{
-                                marginTop: 8,
                                 display: 'flex',
                                 flexDirection: 'row',
                                 alignItems: 'center',
@@ -76,12 +75,13 @@ function Login() {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{ mt: 3 }}
                             >
                             Sign In
                             </Button>
                         </Box>
                     </Box>
+                   
                  </Container>
             </ThemeProvider>
     );
