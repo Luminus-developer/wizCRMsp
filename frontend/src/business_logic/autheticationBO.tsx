@@ -3,22 +3,19 @@
 import {LoginDTO} from '../dto/loginDTO.tsx';
 import { ResponseDTO } from '../dto/responseDTO.tsx';
 
+import axios from 'axios';
+
 export class AuthenticationBO {
 
     constructor() {}
 
     // richiama il web service per il login
-    doLogin(login: LoginDTO) : ResponseDTO {
+    async doLogin(login: LoginDTO) : Promise<ResponseDTO> {
 
         let result = new ResponseDTO();
         try {
-            console.log("start doLogin");
-                console.log(login.userName);
-                console.log(login.password);
-            console.log("end doLogin");
-
-            throw new TypeError('Error message');
-
+            const response = await axios.get("http://localhost:3000/login?userName="+login.userName+"&password="+login.password)
+            result = response.data;
         } catch (error) {
             result.errorCode = 1;
             if (error != null && error != undefined) { 

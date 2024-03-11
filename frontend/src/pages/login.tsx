@@ -1,6 +1,7 @@
 
-//import {LoginDTO} from '../dto/loginDTO.tsx';
-//import {AuthenticationBO} from '../business_logic/autheticationBO';
+import {LoginDTO} from '../dto/loginDTO.tsx';
+import {ResponseDTO} from '../dto/responseDTO.tsx';
+import {AuthenticationBO} from '../business_logic/autheticationBO';
 import wizCRMLogo from '../assets/wizCRM.jpg'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
@@ -9,22 +10,40 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { FormEvent } from 'react';
 
 const defaultTheme = createTheme();
 
 function Login() {
 
-    /*
-    let l = new LoginDTO();
-    l.userName = "test";
-    l.password = "test";
+    async function handleSubmit(event:FormEvent<HTMLFormElement>) {
+        event.preventDefault();
 
-    let bo = new AuthenticationBO();
+        let emailInput = event.currentTarget.elements.namedItem("email");
+        let passwordInput = event.currentTarget.elements.namedItem("password");
 
-    let result = bo.doLogin(l);
+        if (emailInput != null && passwordInput != null) {
+            let emailValue: string = (emailInput as HTMLInputElement).value; 
+            let passwordValue: string = (passwordInput as HTMLInputElement).value; 
 
-    console.log(result);
-    */
+            let userData = new LoginDTO();
+            userData.userName = emailValue;
+            userData.password = passwordValue;
+        
+            let bo:AuthenticationBO = new AuthenticationBO();
+        
+            let data: ResponseDTO = await bo.doLogin(userData);
+
+            console.log("Response Data "+data);
+            if (data != null) {
+                console.log(JSON.stringify(data));
+                console.log(data.errorCode);
+                console.log(data.errorMessage);
+                console.log(data.result);
+            }
+            
+        }
+    }    
 
     return (
             <ThemeProvider theme={defaultTheme}>
@@ -50,7 +69,7 @@ function Login() {
                                 <Box sx={{ fontWeight: 'bold'}}>wizCRM</Box>
                             </Typography>
                         </Box>
-                        <Box component="form" noValidate>
+                        <Box component="form" onSubmit={handleSubmit} noValidate>
                             <TextField
                                 margin="normal"
                                 required
@@ -71,12 +90,12 @@ function Login() {
                                 id="password"
                                 autoComplete="current-password"
                             />
-                            <Button
+                        <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3 }}
-                            >
+                        >
                             Sign In
                             </Button>
                         </Box>
