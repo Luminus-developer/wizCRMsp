@@ -11,6 +11,14 @@ Versione 1.0:
   Puntare alla semplicità grafica e logica.
   Rendere la pagina Responsive
 
+  -- Creare un componente di Loading in attesa che una chiamata API ritorni una risposta
+
+  -- Utilizzare axios per richiamare le API
+     https://dev.to/eliasjnior/how-to-make-asynchronous-requests-to-your-api-in-react-1a7m
+
+  -- Visualizzare la versione in tutte le pagine
+
+
 Versione 1.1
 
 
