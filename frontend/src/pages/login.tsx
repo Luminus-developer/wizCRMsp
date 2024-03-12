@@ -34,7 +34,7 @@ function Login() {
                 console.log(data.result);
             }
             
-        } catch (Error error) {
+        } catch (error) {
             console.log(error);
         }
 
