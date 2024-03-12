@@ -122,7 +122,7 @@ function Login() {
                                 justify-content: 'flex-end',
                             }}>
                             <Typography variant="h6">
-                                <Box sx={{ fontWeight: 'bold'}}>ver. 1.0</Box>
+                                <Box sx={{ fontWeight: 'bold'}}>v1.0</Box>
                             </Typography>
                         </Box>
                     </Box>
