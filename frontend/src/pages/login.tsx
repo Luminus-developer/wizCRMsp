@@ -115,6 +115,16 @@ function Login() {
                             Sign In
                             </Button>
                         </Box>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justify-content: 'flex-end',
+                            }}>
+                            <Typography variant="h6">
+                                <Box sx={{ fontWeight: 'bold'}}>ver. 1.0</Box>
+                            </Typography>
+                        </Box>
                     </Box>
                    
                  </Container>
