@@ -19,8 +19,9 @@ Versione 1.0:
   -- Aggiungere il componente di routing per reindirizzare l'utente all'applicazione dopo la login corretta
   -- Gestire il periodo di validazione delle credenziali dell'utente e la gestione di eventuali messaggi di errore
   
-
 Versione 1.1
+
+  -- Gestire internazionalizzazione
 
 
 
