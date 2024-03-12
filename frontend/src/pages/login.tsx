@@ -17,7 +17,7 @@ const defaultTheme = createTheme();
 function Login() {
 
     async function handleSubmit(event:FormEvent<HTMLFormElement>) {
-        event.preventDefault();
+        event.preventDefault(); // blocca la gestione di default dell'evento
 
         let emailInput = event.currentTarget.elements.namedItem("email");
         let passwordInput = event.currentTarget.elements.namedItem("password");
