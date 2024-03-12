@@ -26,14 +26,10 @@ function Login() {
             let emailValue: string = (emailInput as HTMLInputElement).value; 
             let passwordValue: string = (passwordInput as HTMLInputElement).value; 
 
-            let userData = new LoginDTO();
-            userData.userName = emailValue;
-            userData.password = passwordValue;
-        
+            let userData = new LoginDTO(emailValue,passwordValue);
             let bo:AuthenticationBO = new AuthenticationBO();
         
             let data: ResponseDTO = await bo.doLogin(userData);
-
             console.log("Response Data "+data);
             if (data != null) {
                 console.log(JSON.stringify(data));
