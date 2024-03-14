@@ -1,0 +1,38 @@
+Struttura ipotetica JSON del menù a sinistra:
+
+{
+  {
+	name: Home
+	link: Home
+  },
+  {
+	name:Contacts
+	children:[
+		{
+			name: Customers
+			link: Customers
+		},
+		{
+			name: Leads
+			link: Leads
+		},
+		{
+			name: Prospects
+			link: Prospects
+		}
+	]
+  },
+  {
+		TBD
+  },
+  {
+		TBD
+  },
+  {
+		TBD
+  },
+  {
+	name: Exit
+	link: Exit
+  }
+}
