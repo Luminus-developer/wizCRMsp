@@ -25,3 +25,20 @@ var JSON =
               }
           ]
     }
+
+-- Gestione dello Stato dell'applicazione
+
+Per gestire delle informazioni che possono essere utilizzate da tutti i componenti è stato deciso di utilizzare la libreria Zustand
+
+https://medium.com/@joris.l/tutorial-zustand-a-simple-and-powerful-state-management-solution-9ad4d06d5334
+
+Il Token generato dall'API di Login sarà salvato dentro uno Store.
+In questo modo sarà possibile evitare di utilizzare il LocalStore o il SessionStore del Browser.
+
+
+
+
+
+
+
+
