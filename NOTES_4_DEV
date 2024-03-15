@@ -32,6 +32,8 @@ Per gestire delle informazioni che possono essere utilizzate da tutti i componen
 
 https://medium.com/@joris.l/tutorial-zustand-a-simple-and-powerful-state-management-solution-9ad4d06d5334
 
+https://www.bigbinary.com/blog/upgrading-react-state-management-with-zustand
+
 Il Token generato dall'API di Login sarà salvato dentro uno Store.
 In questo modo sarà possibile evitare di utilizzare il LocalStore o il SessionStore del Browser.
 
