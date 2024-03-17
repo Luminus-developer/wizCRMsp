@@ -1,8 +1,4 @@
-
-import {LoginDTO} from '../dto/loginDTO.tsx';
-import {ResponseDTO} from '../dto/responseDTO.tsx';
-import {AuthenticationBO} from '../business_logic/autheticationBO';
-import wizCRMLogo from '../assets/wizCRM.jpg'
+import { FormEvent, MouseEvent, useState  } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,17 +6,33 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { FormEvent, useState  } from 'react';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import IconButton from '@mui/material/IconButton';
+
+import Loading from '../components/loading.tsx';
+
+import {LoginDTO} from '../dto/loginDTO.tsx';
+import {ResponseDTO} from '../dto/responseDTO.tsx';
+import {AuthenticationBO} from '../business_logic/autheticationBO';
+import wizCRMLogo from '../assets/wizCRM.jpg'
+
 import {getFormElementValueAsString} from '../utils/pageUtil.tsx';
-import Loading from '../components/loading.tsx'
 
 const defaultTheme = createTheme();
 
 function Login() {
     
     const [waiting, setWaiting] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
-    console.log(waiting);
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+    };
+
 
     async function handleSubmit(event:FormEvent<HTMLFormElement>) {
         event.preventDefault(); // blocca la gestione di default dell'evento
@@ -89,9 +101,19 @@ function Login() {
                                 fullWidth
                                 name="password"
                                 label="Password"
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 id="password"
                                 autoComplete="password"
+                                InputProps={{
+                                    endAdornment: <InputAdornment position="end">
+                                                        <IconButton
+                                                        aria-label="toggle password visibility"
+                                                        onClick={handleClickShowPassword}
+                                                        onMouseDown={handleMouseDownPassword}>
+                                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                        </IconButton>
+                                                  </InputAdornment>
+                                }}
                             />
                         <Button
                             type="submit"
