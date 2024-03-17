@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import zIndex from '@mui/material/styles/zIndex';
 import { ColorRing } from 'react-loader-spinner';
 
 function Loading() {
@@ -13,18 +12,37 @@ function Loading() {
                 right:0,
                 top:0,
                 zIndex:1,
-                backgroundColor:'lightgrey',
-                opacity:0.3
+                backgroundColor:'gray',
+                opacity:0.6
             }}>
-            <ColorRing
-                visible={true}
-                height="40"
-                width="40"
-                ariaLabel="color-ring-loading"
-                wrapperStyle={{}}
-                wrapperClass="color-ring-wrapper"
-                colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-            />
+
+            <Box width='100%' height='100%'
+                            sx={{
+                                border: 0,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'center'
+                            }}>
+
+                    <Box
+                        sx={{
+                            border: 0,
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
+                        <ColorRing
+                            visible={true}
+                            height="50"
+                            width="50"
+                            ariaLabel="color-ring-loading"
+                            wrapperStyle={{}}
+                            wrapperClass="color-ring-wrapper"
+                            colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+                        />
+                    </Box>
+                </Box>
         </Box>
     );
 }
