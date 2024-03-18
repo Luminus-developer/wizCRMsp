@@ -1,6 +1,6 @@
 Il CRM è costuituo da 4 aree principali:
 
-- Customers
+- Contacts : Leads (potenziali clienti),Prospects (potenziali clienti che hanno manifestato interesse verso i prodotti dell'azienda) e Customers
 - Sales
 - Marketing
 - Service
