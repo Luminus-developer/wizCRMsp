@@ -4,8 +4,8 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
-const OK = "0";
-const WRONG_CREDENTIALS_ERROR = "10";
+const OK = 0;
+const WRONG_CREDENTIALS_ERROR = 10;
 
 app.use(cors());
 
