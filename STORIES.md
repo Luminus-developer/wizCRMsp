@@ -22,6 +22,7 @@ Versione 1.0:
 Versione 1.1
 
   -- Gestire internazionalizzazione
+     https://lokalise.com/blog/how-to-internationalize-react-application-using-i18next/
 
 
 
