@@ -1,0 +1,9 @@
+{
+    "loginPage": {
+        "email":"Email",
+        "password":"Password",
+        "signIn":"Sign in",
+        "errorInvalidCredentials":"Credentials are not valid",
+        "errorServerError":"Error in Login Service (please check log)"
+    }
+}

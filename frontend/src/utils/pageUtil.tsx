@@ -12,3 +12,12 @@ export function getFormElementValueAsString(formElement: FormEvent<HTMLFormEleme
 
     return ((element as HTMLInputElement).value as string);
 }
+
+export async function delay(ms:number) {
+    return new Promise(resolve => setTimeout(
+      () => {
+        const val = Math.trunc(Math.random() * 100);
+        resolve(val);
+      }, ms
+    ));
+  };

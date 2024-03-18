@@ -10,6 +10,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
+import { useTranslation} from 'react-i18next';
 
 import Loading from '../components/loading.tsx';
 
@@ -18,14 +19,17 @@ import {ResponseDTO} from '../dto/responseDTO.tsx';
 import {AuthenticationBO} from '../business_logic/autheticationBO';
 import wizCRMLogo from '../assets/wizCRM.jpg'
 
-import {getFormElementValueAsString} from '../utils/pageUtil.tsx';
+import {getFormElementValueAsString,delay} from '../utils/pageUtil.tsx';
 
 const defaultTheme = createTheme();
 
 function Login() {
-    
+
+    const { t, i18n } = useTranslation();
     const [waiting, setWaiting] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -33,29 +37,29 @@ function Login() {
       event.preventDefault();
     };
 
-
     async function handleSubmit(event:FormEvent<HTMLFormElement>) {
+
         event.preventDefault(); // blocca la gestione di default dell'evento
 
-        setWaiting(true);
-        try {
-            let emailValue: string = getFormElementValueAsString(event,"email");
-            let passwordValue: string = getFormElementValueAsString(event,"password");
-            let bo:AuthenticationBO = new AuthenticationBO();
-            let data: ResponseDTO = await bo.doLogin(new LoginDTO(emailValue,passwordValue));
-            if (data != null) {
-                setTimeout(() => {
-                    setWaiting(false);
-                }, 1000);
-                
-                console.log(JSON.stringify(data));
-                console.log(data.errorCode);
-                console.log(data.errorMessage);
-                console.log(data.result);
-            }
+        let emailValue: string = getFormElementValueAsString(event,"email");
+        let passwordValue: string = getFormElementValueAsString(event,"password");
+        let bo:AuthenticationBO = new AuthenticationBO();
+        let data: ResponseDTO = await bo.doLogin(new LoginDTO(emailValue,passwordValue));
+        if (data != null) {
+            setWaiting(true);
+            await delay(1000);
+            setWaiting(false);
             
-        } catch (error) {
-            console.log(error);
+            if (1=== data.errorCode) {
+                setError(true);
+                setErrorMessage(t('loginPage.errorServerError'));
+            } else if (10 === data.errorCode) {
+                setError(true);
+                setErrorMessage(t('loginPage.errorInvalidCredentials'));
+            } else {
+                setError(false);
+                setErrorMessage("");
+            }
         }
     }  
     
@@ -86,21 +90,24 @@ function Login() {
                         </Box>
                         <Box component="form" onSubmit={handleSubmit} noValidate>
                             <TextField
+                                error={error}
                                 margin="normal"
                                 required
                                 fullWidth
                                 id="email"
-                                label="Email"
+                                label={t('loginPage.email')}
                                 name="email"
                                 autoComplete="email"
                                 autoFocus
                             />
                             <TextField
+                                error={error}
+                                helperText={errorMessage}
                                 margin="normal"
                                 required
                                 fullWidth
                                 name="password"
-                                label="Password"
+                                label={t('loginPage.password')}
                                 type={showPassword ? 'text' : 'password'}
                                 id="password"
                                 autoComplete="password"
@@ -121,7 +128,7 @@ function Login() {
                             variant="contained"
                             sx={{ mt: 3 }}
                         >
-                            Sign In
+                            {t('loginPage.signIn')}
                             </Button>
                         </Box>
                     </Box>
