@@ -30,16 +30,17 @@ Versione 1.0:
 Versione 1.1
 
  -- Salvare le informazioni dell'utente ottenute dal web service di Login in uno store Zustand
+ 
  -- Assegnare all'applicazione la lingua dell'utente e verificare che tale lingua si valida all'interno di tutta l'applicazione
+ 
  -- Creare il Template dell'applicazione : header,content,footer e menu a sinistra
+ 
  -- Le voci di menù devono essere ottenute da un web service e devono essere tradotte --> Aggiungere anche la voce di Uscita
+ 
  -- Creare il componente Header: a sinistra ci deve essere il logo wizCRM, al centro un campo di ricerca, a destra ci deve essere: nome utente ed immagine utente in forma circolare
+ 
  -- Creare un sistema di verifica della validità del Token prima di chiamare un web service --> lato backend
  
-
-
- 
-
 
 
 
