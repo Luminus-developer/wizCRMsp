@@ -24,6 +24,7 @@ app.get('/login', (req, res) => {
 
         let userData = {
             token : Buffer.from((year+month+day)).toString('base64'),
+            userName: "admin",
             language: "en",
             company: "101"
         }
