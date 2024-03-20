@@ -1,4 +1,4 @@
-import { FormEvent, MouseEvent, useState  } from 'react';
+import { FormEvent, MouseEvent, useState, useRef  } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -30,7 +30,10 @@ function Login() {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const rendersNo  = useRef(0);
 
+    rendersNo.current = rendersNo.current + 1; // Contatore del numero di Renders
+    
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
@@ -74,6 +77,7 @@ function Login() {
     }
     
     return (
+            {console.log("Numero di volte che si invoca il Render:"+rendersNo.current}
             <ThemeProvider theme={defaultTheme}>
                  <Container component="main" maxWidth="xs">
                     <CssBaseline />
