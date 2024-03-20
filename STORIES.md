@@ -40,7 +40,9 @@ Versione 1.1
  -- Creare il componente Header: a sinistra ci deve essere il logo wizCRM, al centro un campo di ricerca, a destra ci deve essere: nome utente ed immagine utente in forma circolare
  
  -- Creare un sistema di verifica della validità del Token prima di chiamare un web service --> lato backend
- 
+
+ -- Attenzione a non mostrare i parametri di chiamata al web service nella URL String
+ https://stackoverflow.com/questions/49320917/hide-id-or-query-string-while-passing-through-react-router
 
 
 
