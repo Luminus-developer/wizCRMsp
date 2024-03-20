@@ -37,6 +37,7 @@ function Login() {
       event.preventDefault();
     };
 
+
     async function handleSubmit(event:FormEvent<HTMLFormElement>) {
 
         event.preventDefault(); // blocca la gestione di default dell'evento
@@ -45,23 +46,32 @@ function Login() {
         let passwordValue: string = getFormElementValueAsString(event,"password");
         let bo:AuthenticationBO = new AuthenticationBO();
         let data: ResponseDTO = await bo.doLogin(new LoginDTO(emailValue,passwordValue));
-        if (data != null) {
-            setWaiting(true);
-            await delay(1000);
-            setWaiting(false);
-            
-            if (1=== data.errorCode) {
-                setError(true);
-                setErrorMessage(t('loginPage.errorServerError'));
-            } else if (10 === data.errorCode) {
-                setError(true);
-                setErrorMessage(t('loginPage.errorInvalidCredentials'));
-            } else {
-                setError(false);
-                setErrorMessage("");
-            }
-        }
+        processResponse(data);
     }  
+
+    function processResponse(data:ResponseDTO) {
+        if (data == null) {
+            console.log("Login Response Data is null");
+            setError(true);
+            setErrorMessage(t('loginPage.errorServerError'));
+            return;
+        }
+
+        setWaiting(true);
+        await delay(1000);
+        setWaiting(false);
+        
+        if (1 === data.errorCode) {
+            setError(true);
+            setErrorMessage(t('loginPage.errorServerError'));
+        } else if (10 === data.errorCode) {
+            setError(true);
+            setErrorMessage(t('loginPage.errorInvalidCredentials'));
+        } else {
+            setError(false);
+            setErrorMessage("");
+        }
+    }
     
     return (
             <ThemeProvider theme={defaultTheme}>
