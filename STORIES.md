@@ -34,6 +34,7 @@ Versione 1.1
  -- Creare il Template dell'applicazione : header,content,footer e menu a sinistra
  -- Le voci di menù devono essere ottenute da un web service e devono essere tradotte --> Aggiungere anche la voce di Uscita
  -- Creare il componente Header: a sinistra ci deve essere il logo wizCRM, al centro un campo di ricerca, a destra ci deve essere: nome utente ed immagine utente in forma circolare
+ -- Creare un sistema di verifica della validità del Token prima di chiamare un web service --> lato backend
  
 
 
