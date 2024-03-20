@@ -1,4 +1,4 @@
-import { FormEvent, MouseEvent, useState, useRef  } from 'react';
+import { FormEvent, MouseEvent, useState, useEffect , useRef  } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -30,16 +30,13 @@ function Login() {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const rendersNo  = useRef(0);
+    const renderCount  = useRef(0);
 
-    rendersNo.current = rendersNo.current + 1; // Contatore del numero di Renders
-    
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
     };
-
 
     async function handleSubmit(event:FormEvent<HTMLFormElement>) {
 
@@ -48,11 +45,11 @@ function Login() {
         let emailValue: string = getFormElementValueAsString(event,"email");
         let passwordValue: string = getFormElementValueAsString(event,"password");
         let bo:AuthenticationBO = new AuthenticationBO();
-        let data: ResponseDTO = await bo.doLogin(new LoginDTO(emailValue,passwordValue));
+        let data:ResponseDTO = await bo.doLogin(new LoginDTO(emailValue,passwordValue));
         processResponse(data);
     }  
 
-    function processResponse(data:ResponseDTO) {
+    async function processResponse(data:ResponseDTO) {
         if (data == null) {
             console.log("Login Response Data is null");
             setError(true);
@@ -63,7 +60,7 @@ function Login() {
         setWaiting(true);
         await delay(1000);
         setWaiting(false);
-        
+
         if (1 === data.errorCode) {
             setError(true);
             setErrorMessage(t('loginPage.errorServerError'));
@@ -75,86 +72,92 @@ function Login() {
             setErrorMessage("");
         }
     }
+
+    useEffect(() => {
+        //renderCount.current = renderCount.current + 1;
+    });
     
     return (
-            {console.log("Numero di volte che si invoca il Render:"+rendersNo.current}
-            <ThemeProvider theme={defaultTheme}>
-                 <Container component="main" maxWidth="xs">
-                    <CssBaseline />
-                    <Box
-                        sx={{
-                            border:0,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center'
-                        }}>
-
+           <>
+                <ThemeProvider theme={defaultTheme}>
+                    <Container component="main" maxWidth="xs">
+                        <CssBaseline />
                         <Box
                             sx={{
+                                border:0,
                                 display: 'flex',
-                                flexDirection: 'row',
-                                alignItems: 'center',
+                                flexDirection: 'column',
+                                alignItems: 'center'
                             }}>
-                            <a href="https://it.wikipedia.org/wiki/Ovibos_moschatus" target="_blank">
-                                <img src={wizCRMLogo} className="logo" alt="WizCRM" />
-                            </a>
-                            <Typography variant="h4">
-                                <Box sx={{ fontWeight: 'bold'}}>wizCRM v1.0</Box>
-                            </Typography>
-                        </Box>
-                        <Box component="form" onSubmit={handleSubmit} noValidate>
-                            <TextField
-                                error={error}
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="email"
-                                label={t('loginPage.email')}
-                                name="email"
-                                autoComplete="email"
-                                autoFocus
-                            />
-                            <TextField
-                                error={error}
-                                helperText={errorMessage}
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label={t('loginPage.password')}
-                                type={showPassword ? 'text' : 'password'}
-                                id="password"
-                                autoComplete="password"
-                                InputProps={{
-                                    endAdornment: <InputAdornment position="end">
-                                                        <IconButton
-                                                        aria-label="toggle password visibility"
-                                                        onClick={handleClickShowPassword}
-                                                        onMouseDown={handleMouseDownPassword}>
-                                                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                                                        </IconButton>
-                                                  </InputAdornment>
-                                }}
-                            />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3 }}
-                        >
-                            {t('loginPage.signIn')}
-                            </Button>
-                        </Box>
-                    </Box>
 
-                    {waiting &&
-                        <>
-                          <Loading/>
-                        </>
-                    }
-                    
-                 </Container>
-            </ThemeProvider>
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                }}>
+                                <a href="https://it.wikipedia.org/wiki/Ovibos_moschatus" target="_blank">
+                                    <img src={wizCRMLogo} className="logo" alt="WizCRM" />
+                                </a>
+                                <Typography variant="h4">
+                                    <Box sx={{ fontWeight: 'bold'}}>wizCRM v1.0</Box>
+                                </Typography>
+                            </Box>
+                            <Box component="form" onSubmit={handleSubmit} noValidate>
+                                <TextField
+                                    error={error}
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label={t('loginPage.email')}
+                                    name="email"
+                                    autoComplete="email"
+                                    autoFocus
+                                />
+                                <TextField
+                                    error={error}
+                                    helperText={errorMessage}
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label={t('loginPage.password')}
+                                    type={showPassword ? 'text' : 'password'}
+                                    id="password"
+                                    autoComplete="password"
+                                    InputProps={{
+                                        endAdornment: <InputAdornment position="end">
+                                                            <IconButton
+                                                            aria-label="toggle password visibility"
+                                                            onClick={handleClickShowPassword}
+                                                            onMouseDown={handleMouseDownPassword}>
+                                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                            </IconButton>
+                                                    </InputAdornment>
+                                    }}
+                                />
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3 }}
+                            >
+                                {t('loginPage.signIn')}
+                                </Button>
+                            </Box>
+                        </Box>
+
+                        {waiting &&
+                            <>
+                            <Loading/>
+                            </>
+                        }
+                        
+                    </Container>
+                </ThemeProvider>
+                {/*renderCount.current*/}
+            </>
     );
 }
 
