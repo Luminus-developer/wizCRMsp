@@ -14,7 +14,7 @@ app.get('/login', (req, res) => {
     const userName = req.query.userName;
     const password = req.query.password;
 
-    var response = "";
+    let response = "";
     if ("admin" === userName && "admin" === password) {
 
         var d = new Date(),
@@ -22,8 +22,14 @@ app.get('/login', (req, res) => {
         day = '' + d.getDate(),
         year = d.getFullYear();
 
+        let userData = {
+            token : Buffer.from((year+month+day)).toString('base64'),
+            language: "en",
+            company: "101"
+        }
+
         response = {
-            result: Buffer.from((year+month+day)).toString('base64'),
+            result: userData,
             errorCode: OK,
             errorMessage: ""
          }
