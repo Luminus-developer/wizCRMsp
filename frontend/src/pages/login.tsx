@@ -85,9 +85,9 @@ function Login() {
             return;
         }
 
-        if (1 === data.error?.code) {
+        if (1 === data.error.code) {
             setError(new ErrorDTO(1,t('loginPage.errorServerError')));
-        } else if (10 === data.error?.code) {
+        } else if (10 === data.error.code) {
             setError(new ErrorDTO(10,t('loginPage.errorInvalidCredentials')));
         } else {
             setError(new ErrorDTO(0,"")); // Questa riga sarà eliminata
