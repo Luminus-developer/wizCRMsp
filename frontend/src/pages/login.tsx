@@ -32,7 +32,7 @@ function Login() {
     const [loginDto, setLoginDto] = useState(new LoginDTO("",""));
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(new ErrorDTO(0,"")); // Segnala la presenza di eventuali Errori
-    const renderCount  = useRef(0);
+    //const renderCount  = useRef(0);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -57,7 +57,7 @@ function Login() {
     } 
 
     useEffect(() => {
-        renderCount.current = renderCount.current + 1;
+        //renderCount.current = renderCount.current + 1;
 
         if (loading === false) return; // E' l'unico modo per non chiamare più volte la webapi
 
@@ -90,8 +90,13 @@ function Login() {
         } else if (10 === data.error?.code) {
             setError(new ErrorDTO(10,t('loginPage.errorInvalidCredentials')));
         } else {
-            setError(new ErrorDTO(0,""));
-            // Dovrà essere eseguito il Redirect al menù dell'applicazione principale
+            setError(new ErrorDTO(0,"")); // Questa riga sarà eliminata
+            
+            /*
+            - Setta la lingua dell'applicazione con quella dell'utente
+            - Salva l'oggetto nello Store di Zunstand
+            - Esegue il Redirect al menù dell'applicazione principale
+            */
         }
     }
 
@@ -179,7 +184,7 @@ function Login() {
                         
                     </Container>
                 </ThemeProvider>
-                {renderCount.current}
+                {/*renderCount.current*/}
             </>
     );
 }
