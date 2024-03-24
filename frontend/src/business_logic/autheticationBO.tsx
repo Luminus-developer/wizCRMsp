@@ -1,5 +1,6 @@
 //<script type="module" src="../dto/LoginDTO"></script>
 
+import { ErrorDTO } from '../dto/errorDTO.tsx';
 import {LoginDTO} from '../dto/loginDTO.tsx';
 import { ResponseDTO } from '../dto/responseDTO.tsx';
 
@@ -11,18 +12,16 @@ export class AuthenticationBO {
 
     // richiama il web service per il login
     async doLogin(login: LoginDTO) : Promise<ResponseDTO> {
-
         let result = new ResponseDTO();
         try {
             const response = await axios.get("http://localhost:3000/login?userName="+login.userName+"&password="+login.password)
             result = response.data;
         } catch (error) {
-            result.errorCode = 1;
             if (error != null && error != undefined) { 
-                result.errorMessage = JSON.stringify(error, Object.getOwnPropertyNames(error));
+                console.log(error);
+                result.error = new ErrorDTO(1,JSON.stringify(error, Object.getOwnPropertyNames(error)));
             }
         }
-    
         return result;
     }    
 }

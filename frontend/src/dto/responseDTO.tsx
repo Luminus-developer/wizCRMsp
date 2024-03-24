@@ -1,13 +1,12 @@
+import { ErrorDTO } from "./errorDTO";
+
 export class ResponseDTO {
 
     result: any | undefined;
-    errorCode: number | undefined;
-    errorMessage: string |undefined;
+    error : ErrorDTO | undefined;
 
     constructor() {
         this.result = "";
-        this.errorCode = 0;
-        this.errorMessage = "";
+        this.error = new ErrorDTO(0,"");
     }
-
 }

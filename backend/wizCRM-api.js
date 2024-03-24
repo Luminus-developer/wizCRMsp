@@ -31,14 +31,18 @@ app.get('/login', (req, res) => {
 
         response = {
             result: userData,
-            errorCode: OK,
-            errorMessage: ""
+            error: {
+                code: OK,
+                message: ""
+            }
          }
     } else {
         response = {
             result: "",
-            errorCode: WRONG_CREDENTIALS_ERROR,
-            errorMessage: "Incorrect credentials"
+            error: {
+                code: WRONG_CREDENTIALS_ERROR,
+                message: "Incorrect credentials"
+            }
          }
     }
 

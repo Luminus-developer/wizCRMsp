@@ -10,9 +10,10 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useTranslation} from 'react-i18next';
 
-import Loading from '../components/loading.tsx';
 
 import {LoginDTO} from '../dto/loginDTO.tsx';
 import {ResponseDTO} from '../dto/responseDTO.tsx';
@@ -20,16 +21,17 @@ import {AuthenticationBO} from '../business_logic/autheticationBO';
 import wizCRMLogo from '../assets/wizCRM.jpg'
 
 import {getFormElementValueAsString,delay} from '../utils/pageUtil.tsx';
+import { ErrorDTO } from '../dto/errorDTO.tsx';
 
 const defaultTheme = createTheme();
 
 function Login() {
 
     const { t, i18n } = useTranslation();
-    const [waiting, setWaiting] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [loginDto, setLoginDto] = useState(new LoginDTO("",""));
     const [showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
+    const [error, setError] = useState(new ErrorDTO(0,"")); // Segnala la presenza di eventuali Errori
     const renderCount  = useRef(0);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -42,41 +44,57 @@ function Login() {
 
         event.preventDefault(); // blocca la gestione di default dell'evento
 
-        let emailValue: string = getFormElementValueAsString(event,"email");
-        let passwordValue: string = getFormElementValueAsString(event,"password");
-        let bo:AuthenticationBO = new AuthenticationBO();
-        let data:ResponseDTO = await bo.doLogin(new LoginDTO(emailValue,passwordValue));
-        processResponse(data);
-    }  
+        /*
+        E' l'unico modo per condividere dei valori 
+        all'interno del componente senza perdere i valori
+        */
+        loginDto.userName = getFormElementValueAsString(event,"email");
+        loginDto.password = getFormElementValueAsString(event,"password");
+
+        // QUI È POSSIBILE GESTIRE EVENTUALI ERRORI SUI DATI DI INPUT
+
+        setLoading(true);
+    } 
+
+    useEffect(() => {
+        renderCount.current = renderCount.current + 1;
+
+        if (loading === false) return; // E' l'unico modo per non chiamare più volte la webapi
+
+        const callWebAPI = async () => {
+            let bo:AuthenticationBO = new AuthenticationBO();
+            let dataResponse:ResponseDTO = new ResponseDTO();
+
+            try {
+                dataResponse = await bo.doLogin(loginDto);
+            } catch {} // La gestione degli errori è nella classe di Business Logic
+
+            await delay(500);
+            setLoading(false);
+            await processResponse(dataResponse);
+        }
+
+        callWebAPI();
+
+    },[loading]);
 
     async function processResponse(data:ResponseDTO) {
         if (data == null) {
             console.log("Login Response Data is null");
-            setError(true);
-            setErrorMessage(t('loginPage.errorServerError'));
+            setError(new ErrorDTO(1,t('loginPage.errorServerError')));
             return;
         }
 
-        setWaiting(true);
-        await delay(1000);
-        setWaiting(false);
-
-        if (1 === data.errorCode) {
-            setError(true);
-            setErrorMessage(t('loginPage.errorServerError'));
-        } else if (10 === data.errorCode) {
-            setError(true);
-            setErrorMessage(t('loginPage.errorInvalidCredentials'));
+        if (1 === data.error?.code) {
+            setError(new ErrorDTO(1,t('loginPage.errorServerError')));
+        } else if (10 === data.error?.code) {
+            setError(new ErrorDTO(10,t('loginPage.errorInvalidCredentials')));
         } else {
-            setError(false);
-            setErrorMessage("");
+            setError(new ErrorDTO(0,""));
+            // Dovrà essere eseguito il Redirect al menù dell'applicazione principale
         }
     }
 
-    useEffect(() => {
-        //renderCount.current = renderCount.current + 1;
-    });
-    
     return (
            <>
                 <ThemeProvider theme={defaultTheme}>
@@ -105,7 +123,7 @@ function Login() {
                             </Box>
                             <Box component="form" onSubmit={handleSubmit} noValidate>
                                 <TextField
-                                    error={error}
+                                    error={error.code > 0}
                                     margin="normal"
                                     required
                                     fullWidth
@@ -116,8 +134,8 @@ function Login() {
                                     autoFocus
                                 />
                                 <TextField
-                                    error={error}
-                                    helperText={errorMessage}
+                                    error={error.code > 0}
+                                    helperText={error.message}
                                     margin="normal"
                                     required
                                     fullWidth
@@ -148,15 +166,20 @@ function Login() {
                             </Box>
                         </Box>
 
-                        {waiting &&
+                        {loading &&
                             <>
-                            <Loading/>
+                                <Backdrop
+                                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                                        open={true}>
+
+                                        <CircularProgress color="inherit" />
+                                </Backdrop>
                             </>
                         }
                         
                     </Container>
                 </ThemeProvider>
-                {/*renderCount.current*/}
+                {renderCount.current}
             </>
     );
 }
