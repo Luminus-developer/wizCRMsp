@@ -91,11 +91,13 @@ function Login() {
             setError(new ErrorDTO(10,t('loginPage.errorInvalidCredentials')));
         } else {
             setError(new ErrorDTO(0,"")); // Questa riga sarà eliminata
-            
             /*
             - Setta la lingua dell'applicazione con quella dell'utente
-            - Salva l'oggetto nello Store di Zunstand
-            - Esegue il Redirect al menù dell'applicazione principale
+            - Salva loggetto User in una variabile di Stato
+            - Nella parte di Rendering, se l'oggetto utente è presente esegue un codice simile a:
+              https://stackoverflow.com/questions/74395749/how-to-store-user-data-in-context-and-using-it-on-other-components-reactjs
+
+              In questo modo l'utente approderà al menù principale dell'applicazione
             */
         }
     }
