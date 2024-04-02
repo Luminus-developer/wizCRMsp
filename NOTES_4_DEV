@@ -38,6 +38,10 @@ Il Token generato dall'API di Login sarà salvato dentro uno Store.
 In questo modo sarà possibile evitare di utilizzare il LocalStore o il SessionStore del Browser.
 
 
+Link Utile per sviluppare il Redirect dalla Login alla pagina principale dell'Applicazione:
+
+https://www.makeuseof.com/redirect-user-after-login-react/
+
 
 
 
