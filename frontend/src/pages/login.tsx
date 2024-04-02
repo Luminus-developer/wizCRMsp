@@ -13,7 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useTranslation} from 'react-i18next';
-
+import { useNavigate } from 'react-router-dom';
 
 import {LoginDTO} from '../dto/loginDTO.tsx';
 import {ResponseDTO} from '../dto/responseDTO.tsx';
@@ -59,6 +59,7 @@ function Login() {
     useEffect(() => {
         //renderCount.current = renderCount.current + 1;
 
+        console.log("Login UseEffect");
         if (loading === false) return; // E' l'unico modo per non chiamare più volte la webapi
 
         const callWebAPI = async () => {
@@ -79,11 +80,15 @@ function Login() {
     },[loading]);
 
     async function processResponse(data:ResponseDTO) {
+
         if (data == null) {
             console.log("Login Response Data is null");
             setError(new ErrorDTO(1,t('loginPage.errorServerError')));
             return;
         }
+
+        // Fake
+        data.error.code = 0; // E' un falso successo    
 
         if (1 === data.error.code) {
             setError(new ErrorDTO(1,t('loginPage.errorServerError')));
@@ -99,6 +104,9 @@ function Login() {
 
               In questo modo l'utente approderà al menù principale dell'applicazione
             */
+              console.log("I am in Login Component and I'll redirect to App again because I'm logged");
+              const navigate = useNavigate();
+              navigate("/app");
         }
     }
 

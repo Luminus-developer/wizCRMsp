@@ -2,7 +2,7 @@ function DashBoard() {
 
   return (
       <>
-        Welcome to DashBoard {user.userName} :-)
+        <div>DashBoard</div>        
       </>
   );
 
