@@ -32,7 +32,13 @@ function Login() {
     const [loginDto, setLoginDto] = useState(new LoginDTO("",""));
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(new ErrorDTO(0,"")); // Segnala la presenza di eventuali Errori
+    const auth  = localStorage.getItem("authenticated");
+    const [authenticated, setauthenticated] = useState(("true" === auth));
+
+    const navigate = useNavigate();
     //const renderCount  = useRef(0);
+
+
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -104,9 +110,11 @@ function Login() {
 
               In questo modo l'utente approderà al menù principale dell'applicazione
             */
+              setauthenticated(true);
+              localStorage.setItem("authenticated", "true");
               console.log("I am in Login Component and I'll redirect to App again because I'm logged");
-              const navigate = useNavigate();
-              navigate("/app");
+              console.log("I am logged: "+localStorage.getItem("authenticated"));
+              navigate("/dashboard");
         }
     }
 
@@ -133,7 +141,7 @@ function Login() {
                                     <img src={wizCRMLogo} className="logo" alt="WizCRM" />
                                 </a>
                                 <Typography variant="h4">
-                                    <Box sx={{ fontWeight: 'bold'}}>wizCRM v1.0</Box>
+                                    <Box sx={{ fontWeight: 'bold'}}>wizCRM v1.1</Box>
                                 </Typography>
                             </Box>
                             <Box component="form" onSubmit={handleSubmit} noValidate>
