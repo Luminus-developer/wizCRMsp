@@ -1,16 +1,15 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import { redirect  } from 'react-router-dom';
 
 interface PrivateRouteProps {
-    component: React.ComponentType<any>;
+    component: ReactNode;
     isAuthenticated: boolean;
-    path: string;
-    exact?: boolean;
   }
   
   function PrivateRoute({component,isAuthenticated}:PrivateRouteProps ) {
     return (
             <>
+            {console.log("DashBoardgggggg: "+isAuthenticated)}
             {isAuthenticated ? component : redirect("/login")}
             </>
     );

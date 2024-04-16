@@ -17,13 +17,12 @@ function App() {
     <>
       <BrowserRouter>
         <MainTemplate isAuthenticated={isAuthenticated}>
-            
             <Routes>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/dashboard"
-                   element={<PrivateRoute path="/dashboard" 
+                   element={<PrivateRoute 
                               isAuthenticated={isAuthenticated} 
-                              component={DashBoard}/>}
+                              component={<DashBoard/>}/>}
                 />
             
             </Routes>
