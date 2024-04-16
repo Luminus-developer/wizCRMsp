@@ -5,15 +5,15 @@ import SideMenu from "../components/sideMenu";
 
 type MainTemplateProps = {
   children : ReactNode;
+  isAuthenticated: boolean;
 }
 
-function MainTemplate({children}:MainTemplateProps ) {
+function MainTemplate({isAuthenticated,children}:MainTemplateProps ) {
   return (
       <>
-        <Header/>
-        <SideMenu/>
-          <center>{children}</center>
-        <Footer/>
+        {isAuthenticated ? 
+          <><Header/> <SideMenu/><center>{children}</center> <Footer/></>
+         : <>{children}</>} 
       </>
   );
 }

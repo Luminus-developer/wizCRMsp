@@ -1,27 +1,33 @@
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
 
 import './App.css'
 import Login from './pages/login';
 import MainTemplate from './template/mainTemplate';
 import DashBoard from './pages/dashboard';
-import Leads from './pages/contacts/leads';
-import Prospects from './pages/contacts/prospects';
-import Customers from './pages/contacts/customers';
+//import Leads from './pages/contacts/leads';
+//import Prospects from './pages/contacts/prospects';
+//import Customers from './pages/contacts/customers';
+
+import PrivateRoute from './components/privateRoute';
+
+const isAuthenticated: boolean = false;
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        <MainTemplate isAuthenticated={isAuthenticated}>
+            
             <Routes>
-                <Route path="/" element={<Login/>}/>
                 <Route path="/login" element={<Login/>}/>
-                <Route path="/dashboard" element={<MainTemplate><DashBoard/></MainTemplate>}/>
-                <Route path="/contacts/leads" element={<MainTemplate><Leads/></MainTemplate>}/>
-                <Route path="/contacts/prospects" element={<MainTemplate><Prospects/></MainTemplate>}/>
-                <Route path="/contacts/customers" element={<MainTemplate><Customers/></MainTemplate>}/>
+                <Route path="/dashboard"
+                   element={<PrivateRoute path="/dashboard" 
+                              isAuthenticated={isAuthenticated} 
+                              component={DashBoard}/>}
+                />
+            
             </Routes>
+         </MainTemplate>
       </BrowserRouter>    
     </>
   )
