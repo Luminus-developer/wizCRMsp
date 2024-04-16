@@ -14,7 +14,7 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useTranslation} from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
+
 
 import {LoginDTO} from '../dto/loginDTO.tsx';
 import {ResponseDTO} from '../dto/responseDTO.tsx';
@@ -23,6 +23,8 @@ import wizCRMLogo from '../assets/wizCRM.jpg'
 
 import {getFormElementValueAsString,delay} from '../utils/pageUtil.tsx';
 import { ErrorDTO } from '../dto/errorDTO.tsx';
+
+import Cookies from 'js-cookie';
 
 const defaultTheme = createTheme();
 
@@ -110,7 +112,6 @@ function Login() {
             */
               setauthenticated(true);
               localStorage.setItem("authenticated", "true");
-
               console.log ("Data in token:"+JSON.stringify(data.result));
 
               Cookies.set('token', data.result, { expires: 7, secure: true });
