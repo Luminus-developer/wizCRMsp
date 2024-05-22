@@ -8,26 +8,38 @@ import DashBoard from './pages/dashboard';
 //import Prospects from './pages/contacts/prospects';
 //import Customers from './pages/contacts/customers';
 
-import PrivateRoute from './components/privateRoute';
+//import PrivateRoute from './components/privateRoute';
+
+import { AuthProvider } from './context/authContext';
+import RequireAuth from './components/requireAuth';
 
 const isAuthenticated: boolean = false;
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <MainTemplate isAuthenticated={isAuthenticated}>
-            <Routes>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/dashboard"
-                   element={<PrivateRoute 
-                              isAuthenticated={isAuthenticated} 
-                              component={<DashBoard/>}/>}
-                />
-            
-            </Routes>
-         </MainTemplate>
-      </BrowserRouter>    
+    <AuthProvider>
+        <BrowserRouter>
+          <MainTemplate isAuthenticated={isAuthenticated}>
+              <Routes>
+                  <Route path="/login" element={<Login/>}/>
+                  <Route path="/dashboard"
+                    element={<RequireAuth>
+                              <DashBoard /> 
+                             </RequireAuth>  
+                             }
+                  />
+                  {/*
+                  <Route path="/dashboard"
+                    element={<PrivateRoute 
+                                isAuthenticated={isAuthenticated} 
+                                component={<DashBoard/>}/>}
+                  />
+                  */}
+              </Routes>
+          </MainTemplate>
+        </BrowserRouter>    
+      </AuthProvider>
     </>
   )
 }
