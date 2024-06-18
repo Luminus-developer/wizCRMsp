@@ -11,24 +11,19 @@ import DashBoard from './pages/dashboard';
 //import PrivateRoute from './components/privateRoute';
 
 import { AuthProvider } from './context/authContext';
-import RequireAuth from './components/requireAuth';
+//import RequireAuth from './components/requireAuth';
 
-const isAuthenticated: boolean = false;
+//const isAuthenticated: boolean = false;
 
 function App() {
   return (
     <>
     <AuthProvider>
         <BrowserRouter>
-          <MainTemplate isAuthenticated={isAuthenticated}>
+          <MainTemplate>
               <Routes>
                   <Route path="/login" element={<Login/>}/>
-                  <Route path="/dashboard"
-                    element={<RequireAuth>
-                              <DashBoard /> 
-                             </RequireAuth>  
-                             }
-                  />
+                  <Route path="/dashboard" element={<DashBoard /> }/>
                   {/*
                   <Route path="/dashboard"
                     element={<PrivateRoute 

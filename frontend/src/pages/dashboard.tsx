@@ -1,12 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext} from "react";
 import { Navigate } from 'react-router-dom';
 
-import Cookies from 'js-cookie';
+import {AuthContext} from './../context/authContext.tsx';
+import {User} from '../dto/user.tsx';
+
+//import Cookies from 'js-cookie';
 
 function DashBoard() {
-  const [authenticated, setauthenticated] = useState(false); 
+  //const [authenticated, setauthenticated] = useState(false); 
+
+  console.log ("DashBoard");
+
+  const authContext = useContext(AuthContext);
+
+  let authenticated = false;
+
+  let user: User;
+  
+  if (authContext != null && authContext.user != null) {
+      user = authContext.user;
+      authenticated = true;
+  } 
 
   useEffect(() => {
+
+    console.log ("DashBoard UseEffect");
+
+
+    /*
     const autheticantedString = localStorage.getItem("authenticated");
 
     console.log("DashBoard Autheticaded:"+authenticated);
@@ -19,6 +40,7 @@ function DashBoard() {
     setauthenticated(("true" === autheticantedString));
 
     console.log("DashBoard :"+authenticated);
+    */
   }, []);
 
   if (!authenticated) {

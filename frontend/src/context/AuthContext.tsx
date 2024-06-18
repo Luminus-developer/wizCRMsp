@@ -1,14 +1,10 @@
 import { createContext, useState, useContext, ReactNode } from 'react';
+import {User} from '../dto/user.tsx';
 
-type User = {
-    name: string;
-    company: string;
-}
-
+// Questa struttura contiene tutti gli attributi e metodi utilizzabili nel Provider del Context
 type AuthContextType = {
     user: User | null;
-    login: (userCredentials: User, callback: VoidFunction) => void;
-    logout: (callback: VoidFunction) => void;
+    assignDataForAuthentication(user: User):void;
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -17,22 +13,22 @@ type AuthProviderProps = {
     children: ReactNode;
 }
 
+/**
+ * Il componente AuthProvider contiene i metodi che possono essere utilizzati per
+ * agire sugli attributi o metodi definiti nel Context 
+ * 
+ * @returns 
+ */
+
 export const AuthProvider = ({ children }: AuthProviderProps) => {
     const [user, setUser] = useState<User | null>(null);
-  
-    const login = (userCredentials: User, callback: VoidFunction) => {
-      // Perform login logic, then:
-      setUser(userCredentials);
-      callback();
-    };
-  
-    const logout = (callback: VoidFunction) => {
-      setUser(null);
-      callback();
-    };
-  
+
+    const assignDataForAuthentication = (user: User) => {
+      setUser(user);
+    }
+
     return (
-      <AuthContext.Provider value={{ user, login, logout }}>
+      <AuthContext.Provider value={{ user,assignDataForAuthentication }}>
         {children}
       </AuthContext.Provider>
     );

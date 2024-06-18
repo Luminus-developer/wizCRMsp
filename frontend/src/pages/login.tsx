@@ -1,4 +1,7 @@
-import { FormEvent, MouseEvent, useState, useEffect , useRef  } from 'react';
+import { FormEvent, MouseEvent, useState, useEffect , useRef,useContext } from 'react';
+import {AuthContext} from './../context/authContext.tsx';
+import {User} from '../dto/user.tsx';
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -24,19 +27,21 @@ import wizCRMLogo from '../assets/wizCRM.jpg'
 import {getFormElementValueAsString,delay} from '../utils/pageUtil.tsx';
 import { ErrorDTO } from '../dto/errorDTO.tsx';
 
-import Cookies from 'js-cookie';
+//import Cookies from 'js-cookie';
 
 const defaultTheme = createTheme();
 
 function Login() {
+    // Accede all'oggetto Context dove è disponibile una variabile di stato indicante se l'utente è Autenticato
+    const authContext = useContext(AuthContext);
 
     const { t, i18n } = useTranslation();
     const [loading, setLoading] = useState(false);
     const [loginDto, setLoginDto] = useState(new LoginDTO("",""));
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(new ErrorDTO(0,"")); // Segnala la presenza di eventuali Errori
-    const auth  = localStorage.getItem("authenticated");
-    const [authenticated, setauthenticated] = useState(("true" === auth));
+    //const auth  = localStorage.getItem("authenticated");
+    //const [authenticated, setauthenticated] = useState(("true" === auth));
 
     const navigate = useNavigate();
     //const renderCount  = useRef(0);
@@ -101,7 +106,9 @@ function Login() {
         } else if (10 === data.error.code) {
             setError(new ErrorDTO(10,t('loginPage.errorInvalidCredentials')));
         } else {
-            setError(new ErrorDTO(0,"")); // Questa riga sarà eliminata
+
+            console.log("Dati ok");
+            //setError(new ErrorDTO(0,"")); // Questa riga sarà eliminata
             /*
             - Setta la lingua dell'applicazione con quella dell'utente
             - Salva loggetto User in una variabile di Stato
@@ -110,6 +117,8 @@ function Login() {
 
               In questo modo l'utente approderà al menù principale dell'applicazione
             */
+              
+              /*
               setauthenticated(true);
               localStorage.setItem("authenticated", "true");
               console.log ("Data in token:"+JSON.stringify(data.result));
@@ -118,7 +127,28 @@ function Login() {
 
               console.log("I am in Login Component and I'll redirect to App again because I'm logged");
               console.log("I am logged: "+localStorage.getItem("authenticated"));
-              navigate("/dashboard");
+              */
+
+            
+            console.log ("Context:"+authContext); 
+            if (authContext != null) {
+
+                let user: User;
+                
+                user  = {
+                    token: data.result.token,
+                    name: data.result.userName,
+                    company: data.result.company,
+                    language: data.result.language
+                }
+                
+
+                authContext.assignDataForAuthentication(user);
+
+                console.log(authContext.user);
+                navigate("/dashboard");
+            } else 
+                navigate("/login");
         }
     }
 
