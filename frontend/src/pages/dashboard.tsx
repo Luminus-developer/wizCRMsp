@@ -13,14 +13,11 @@ function DashBoard() {
 
   const authContext = useContext(AuthContext);
 
-  let authenticated = false;
-
-  let user: User;
-  
-  if (authContext != null && authContext.user != null) {
-      user = authContext.user;
-      authenticated = true;
-  } 
+  let auth : boolean = false;
+  if (authContext != null) {
+    auth = authContext.isUserAutheticated();
+    console.log("MainTempalte: "+auth);
+  }
 
   useEffect(() => {
 
@@ -43,7 +40,7 @@ function DashBoard() {
     */
   }, []);
 
-  if (!authenticated) {
+  if (!auth) {
     return <Navigate replace to="/login" />;
   } else {
     return (

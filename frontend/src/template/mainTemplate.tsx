@@ -14,17 +14,15 @@ function MainTemplate({children}:MainTemplateProps ) {
 
   const authContext = useContext(AuthContext);
 
-  let isAuthenticated = false;
-
-  if (authContext != null && authContext.user != null) {
-    isAuthenticated = true;
-  } 
-
-  console.log("MainTemplate "+isAuthenticated);
+  let auth : boolean = false;
+  if (authContext != null) {
+    auth = authContext.isUserAutheticated();
+    console.log("MainTempalte: "+auth);
+  }
 
   return (
       <>
-        {isAuthenticated ? 
+        {auth ? 
           <><Header/> <SideMenu/><center>{children}</center> <Footer/></>
         : <><Login/></>} 
       </>
