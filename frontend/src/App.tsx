@@ -10,7 +10,10 @@ import DashBoard from './pages/dashboard';
 
 //import PrivateRoute from './components/privateRoute';
 
+// Capire la differenza tra Provider e Context
+
 import { AuthProvider } from './context/authContext';
+
 //import RequireAuth from './components/requireAuth';
 
 //const isAuthenticated: boolean = false;
@@ -25,7 +28,7 @@ function App() {
                   <Route path="/" element={<Login/>}/>
                   <Route path="/login" element={<Login/>}/>
                   <Route path="/dashboard" element={<DashBoard /> }/>
-                  {/*
+                  {/* 
                   <Route path="/dashboard"
                     element={<PrivateRoute 
                                 isAuthenticated={isAuthenticated} 
