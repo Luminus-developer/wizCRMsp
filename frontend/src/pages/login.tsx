@@ -37,7 +37,12 @@ function Login() {
 
     const { t, i18n } = useTranslation();
     const [loading, setLoading] = useState(false);
-    const [loginDto, setLoginDto] = useState(new LoginDTO("",""));
+    
+    
+    //const [loginDto, setLoginDto] = useState(new LoginDTO("",""));
+
+    const loginDto = new LoginDTO("","");
+    
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(new ErrorDTO(0,"")); // Segnala la presenza di eventuali Errori
     //const auth  = localStorage.getItem("authenticated");

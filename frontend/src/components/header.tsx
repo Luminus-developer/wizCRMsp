@@ -10,7 +10,10 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+
+import React from 'react';
+
+import wizCRMLogo from '../assets/wizCRM_app_logo.png'
 
 /**
  * La voce di menù Contacts conterrà i seguenti sotto menù: Leads, Prospetcs e Customers
@@ -19,6 +22,8 @@ import AdbIcon from '@mui/icons-material/Adb';
  */
 
 const pages = ['Contacts', 'Sales', 'Marketing','Service'];
+
+const contactsPages = ['Leads','Prospects','Customers']; // Trovare il modo per Aggiungere queste voci sotto il pulsante "Contacts"
 
 // Voci del submenù dell'immagine dell'utente collegato
 const settings = ['Profile', 'Dashboard', 'Logout'];
@@ -29,47 +34,36 @@ function Header() {
 
   // Aggiungere codice per gestire gli eventi
 
-  //const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  //const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    //setAnchorElNav(event.currentTarget);
+    setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    //setAnchorElUser(event.currentTarget);
+    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
-    //setAnchorElNav(null);
+    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
-    //setAnchorElUser(null);
+    setAnchorElUser(null);
   };
 
   return (
-    <AppBar position="static">
+    <AppBar>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
 
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>          
+        <Box>
+          <a title='wizCRM' href="https://it.wikipedia.org/wiki/Ovibos_moschatus" target="_blank">
+            <img src={wizCRMLogo} className="logoApp"/>
+          </a>
+          wizCRM
+        </Box>
+
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -92,7 +86,7 @@ function Header() {
                 vertical: 'top',
                 horizontal: 'left',
               }}
-              open={Boolean(false)}
+              open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: 'block', md: 'none' },
@@ -105,25 +99,6 @@ function Header() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -154,7 +129,7 @@ function Header() {
                 vertical: 'top',
                 horizontal: 'right',
               }}
-              open={Boolean(false)}
+              open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (

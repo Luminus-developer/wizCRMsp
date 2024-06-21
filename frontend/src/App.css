@@ -14,6 +14,11 @@
   filter: drop-shadow(0 0 2em #646cffaa);
 }
 
+.logoApp {
+  height: 15%;
+  width: 15%;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
