@@ -1,0 +1,117 @@
+Comandi React
+	
+
+npx create-react-app mtime --template typescript: Creazione nuova App
+
+npm start: Avvio applicazione
+
+
+Deploy in produzione:
+
+npm build
+	
+...
+
+Abilitazione esecuzione script PowerShell
+
+
+- Installazione pacchetti esterni
+
+
+-- Installazione Vite:
+   
+   Vite è un server per sviluppare le applicazioni React; permette di eseguire più velocemente le modifiche apportate al codice.
+		- Entrae nella directory che conterrà i progetti React
+		- Eseguire il seguente comando: npm create vite@latest
+		- Seguire gli step --> E' possibile scegliere il linguaggio dell'applicazione oltre al alla directory del progetto
+		  E' interessante sapere che oltre al linguaggio è possibile anche scegliere di utilizzare SWC in accoppiata al 
+		  linguaggio.
+		  SWC è un compilatore di Javascript super veloce scritto in Rust (da provare)
+	
+npm install --save-dev @types/react @types/react-dom : installazione typings for React
+
+-- Gestione GUI
+
+npm install @mui/material @emotion/react @emotion/styled --> Installazione componenti MUI
+
+npm install @mui/icons-material --> Installazione icone 
+
+npm install @mui/x-data-grid --> Installazione DataGrid
+
+npm install @mui/x-data-grid-generator --> Installazione generatore automatico di dati per il DataGrid
+
+    Documentazione Icone: https://mui.com/material-ui/material-icons/?query=menu
+
+-- Gestione delle chiamate asincrone
+
+npm install axios: Installazione Axios per richiamare web service
+	
+-- Gestione dello Stato dell'applicazione
+
+npm install @preact/signals-react
+
+npm install zustand
+
+Note sui componenti Mui
+
+- There are five grid breakpoints: xs, sm, md, lg, and xl.
+
+	xs, extra-small: 0px
+	sm, small: 600px
+	md, medium: 900px
+	lg, large: 1200px
+	xl, extra-large: 1536px
+
+
+-               <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 2 }}>
+                    <MenuIcon />
+                </IconButton>
+
+    sx si usa per definire attributi al componente
+    mr --> margine destro
+	
+	
+Sviluppare con TypeScript + Vite + Altri nuovi componenti
+
+Creazione progetto con Vite: npm create vite@latest --> Seguire le indicazioni
+
+Dopo aver creato il nuovo progetto:
+
+npm install --> scarica i pacchetti necessari per lo sviluppo dell'applicazione
+	
+npm run dev --> esegue il server dell'applicazione
+
+Installazione routing: npm i react-router-dom
+
+
+
+NodeJS Server:
+
+Start the Server: In your terminal, run node server.js. 
+Your server is now live at http://localhost:3000
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

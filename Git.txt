@@ -1,0 +1,32 @@
+Comandi Git
+	
+    // Visualizzare il log
+	git log --oneline --all --graph 
+		
+	git pull --> Ottiene gli aggiornamenti dal master
+
+	git add * --> mette in staging tutti i file da commitare
+	
+	git status --> Visualizza lo stato dei file ( quali file sono stati modificati)
+	
+	git commit -m "[Commento]" --> Esegue il commit di tutti i file in staging
+		
+	git commit --amend --> Serve per eseguire il commit dei file ma permette di sovrascrivere il commit precedente
+	
+	git push --> Rende definitivi i commit sul repository
+	
+	git restore --staged
+	
+	git difference
+	
+	git branch [nome branch] --> Crea un nuovo branch
+	
+	git checkout [nome branch]
+	
+	git merge [nome branch] --> Per eseguire il merge di un branch: spostarsi sul branch finale
+                                ed 
+								eseguire il comando : git merge [nome branch]
+									
+									
+	
+	
