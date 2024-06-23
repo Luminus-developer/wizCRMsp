@@ -38,10 +38,12 @@ function Login() {
     const { t, i18n } = useTranslation();
     const [loading, setLoading] = useState(false);
     
-    
-    //const [loginDto, setLoginDto] = useState(new LoginDTO("",""));
-
-    const loginDto = new LoginDTO("","");
+    /*
+    Se voglio utilizzare l'oggetto loginDto all'interno del componente, lo devo dichiare con useState
+    In questo modo potrò modificare gli attributi dell'oggetto loginDto ed i valori saranno mantenuti 
+    all'interno del componente --> Per scatenare un Rendering dovrò invocare il metodo setLoginDto
+    */
+    const [loginDto, setLoginDto] = useState(new LoginDTO("",""));
     
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(new ErrorDTO(0,"")); // Segnala la presenza di eventuali Errori
@@ -70,6 +72,9 @@ function Login() {
         loginDto.userName = getFormElementValueAsString(event,"email");
         loginDto.password = getFormElementValueAsString(event,"password");
 
+        console.log("Login Form Data: "+JSON.stringify(loginDto));
+
+
         // QUI È POSSIBILE GESTIRE EVENTUALI ERRORI SUI DATI DI INPUT
 
         setLoading(true);
@@ -86,6 +91,9 @@ function Login() {
             let dataResponse:ResponseDTO = new ResponseDTO();
 
             try {
+
+                console.log("Login Form Data UseEffect: "+JSON.stringify(loginDto));
+
                 dataResponse = await bo.doLogin(loginDto);
             } catch {} // La gestione degli errori è nella classe di Business Logic
 
@@ -100,11 +108,14 @@ function Login() {
 
     async function processResponse(data:ResponseDTO) {
 
+        console.log ("Login Data:"+data);
         if (data == null) {
             console.log("Login Response Data is null");
             setError(new ErrorDTO(1,t('loginPage.errorServerError')));
             return;
         }
+
+        console.log ("Login Data Error Code:"+data.error.code);
 
         if (1 === data.error.code) {
             setError(new ErrorDTO(1,t('loginPage.errorServerError')));
@@ -144,13 +155,14 @@ function Login() {
                     token: data.result.token,
                     name: data.result.userName,
                     company: data.result.company,
-                    language: data.result.language
+                    language: data.result.language,
+                    tokenTimeout: data.result.tokenTimout,
                 }
                 
 
                 authContext.assignDataForAuthentication(user);
 
-                console.log(authContext.user);
+                console.log("Assign User to Context:"+JSON.stringify(authContext.user));
                 navigate("/dashboard");
             } else 
                 navigate("/login");

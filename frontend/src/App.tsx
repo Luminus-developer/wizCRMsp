@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useContext} from 'react';
 
 import './App.css'
 import Login from './pages/login';
@@ -8,33 +9,43 @@ import DashBoard from './pages/dashboard';
 //import Prospects from './pages/contacts/prospects';
 //import Customers from './pages/contacts/customers';
 
-//import PrivateRoute from './components/privateRoute';
+import PrivateRoute from './components/privateRoute';
 
 // Capire la differenza tra Provider e Context
 
 import { AuthProvider } from './context/authContext';
+
+import {AuthContext} from './context/authContext.tsx';
 
 //import RequireAuth from './components/requireAuth';
 
 //const isAuthenticated: boolean = false;
 
 function App() {
+
+  const authContext = useContext(AuthContext);
+
+  let isUserAutheticated : boolean = false;
+  if (authContext != null) {
+    isUserAutheticated = authContext.isUserAutheticated();
+  }
+
   return (
     <>
     <AuthProvider>
         <BrowserRouter>
           <MainTemplate>
               <Routes>
-                  <Route path="/" element={<Login/>}/>
-                  <Route path="/login" element={<Login/>}/>
-                  <Route path="/dashboard" element={<DashBoard /> }/>
-                  {/* 
-                  <Route path="/dashboard"
+                  <Route path="/"
                     element={<PrivateRoute 
-                                isAuthenticated={isAuthenticated} 
+                                isAuthenticated={isUserAutheticated} 
                                 component={<DashBoard/>}/>}
                   />
-                  */}
+                  <Route path="/dashboard"
+                    element={<PrivateRoute 
+                                isAuthenticated={isUserAutheticated} 
+                                component={<DashBoard/>}/>}
+                  />
               </Routes>
           </MainTemplate>
         </BrowserRouter>    

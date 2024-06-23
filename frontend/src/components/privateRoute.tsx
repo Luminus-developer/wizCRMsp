@@ -9,8 +9,7 @@ interface PrivateRouteProps {
   function PrivateRoute({component,isAuthenticated}:PrivateRouteProps ) {
     return (
             <>
-            {console.log("DashBoardgggggg: "+isAuthenticated)}
-            {isAuthenticated ? component : redirect("/login")}
+              {isAuthenticated ? component : redirect("/login")}
             </>
     );
   }

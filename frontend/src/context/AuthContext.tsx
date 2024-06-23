@@ -28,27 +28,40 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       // Aggiorna lo stato e genera un render
       setUser(user);
       // salva l'oggetto user nel local storage del browser
-      localStorage.setItem("user",JSON.stringify(user));
+      //localStorage.setItem("user",JSON.stringify(user));
 
-      console.log (JSON.stringify(user));
-
+      // salva l'oggetto user nel session storage e quindi quando l'utente chiude il browser il valore salvato è eliminato
+      sessionStorage.setItem("user",JSON.stringify(user));
+      //console.log (JSON.stringify(user));
     }
 
-    
     const isUserAutheticated = () => {
-      if (user == null) {
-        let userString: String | null =localStorage.getItem("user");
 
-        console.log("userString : "+userString);
+      let result: boolean = true;
 
-        if (userString != null) {
-          return true;
-        } else {
-          return false;
-        }
+      // I dati dello User sono sempre salvati nel SessionStorage
+      let userString: string | null =sessionStorage.getItem("user");
+
+      if (userString == null || userString.trim() === "") {
+        result = false;
+      } 
+
+
+      if (userString != null) {
+        let user: User = JSON.parse(userString);
+
+        let token: string = user.token;
+        let tokenTimeoutInSeconds: number = user.tokenTimeout;
+
+        let tokenDateInSeconds : number = Number(atob(token));
+
+        let nowInSeconds =Math.round(Date.now() / 1000);
+
+        if ((tokenDateInSeconds + tokenTimeoutInSeconds) > nowInSeconds )
+          result = false;
       }
 
-      return true;
+      return result;
     }
 
     return (

@@ -12,6 +12,9 @@ export class AuthenticationBO {
 
     // richiama il web service per il login
     async doLogin(login: LoginDTO) : Promise<ResponseDTO> {
+
+        console.log("BO doLogin: "+JSON.stringify(login));
+
         let result = new ResponseDTO();
         try {
             const response = await axios.get("http://localhost:3000/login?userName="+login.userName+"&password="+login.password)

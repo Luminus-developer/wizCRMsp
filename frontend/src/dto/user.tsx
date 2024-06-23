@@ -3,4 +3,5 @@ export  type User = {
     name: string;
     company: string;
     language: string;
+    tokenTimeout: number;
 }

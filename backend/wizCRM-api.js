@@ -35,20 +35,22 @@ app.get('/login', (req, res) => {
          return;
     } 
 
-     console.log("Check Admin Admin");
+     console.log("Check Credentials userName: "+userName+" password: "+password);
 
     if ("admin" === userName && "admin" === password) {
 
-        var d = new Date(),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
+        let nowInSeconds =Math.round(Date.now() / 1000);
+
+        let tokenBase64  = btoa(nowInSeconds);
+
+        console.log ("Token in Base64: "+tokenBase64);
 
         let userData = {
-            token : Buffer.from((year+month+day)).toString('base64'),
+            token : tokenBase64,
             userName: "admin",
             language: "en",
-            company: "101"
+            company: "101",
+            tokenTimeout: 900  // Validità del Token espressa in secondi
         }
 
         response = {
