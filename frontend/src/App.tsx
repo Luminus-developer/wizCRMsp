@@ -19,7 +19,9 @@ function App() {
         <BrowserRouter>
           <MainTemplate>
               <Routes>
-             
+                  <Route path="/"
+                    element={<PrivateRoute component={<DashBoard/>}/>}
+                  />
                   <Route path="/dashboard"
                     element={<PrivateRoute component={<DashBoard/>}/>}
                   />
