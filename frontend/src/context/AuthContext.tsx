@@ -5,6 +5,7 @@ import {User} from '../dto/user.tsx';
 type AuthContextType = {
     user: User | null;
     assignDataForAuthentication (user: User):void;
+    assignDataForLogout():void;
     isUserAutheticated (): boolean;
 }
 
@@ -27,12 +28,19 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const assignDataForAuthentication = (user: User) => {
       // Aggiorna lo stato e genera un render
       setUser(user);
-      // salva l'oggetto user nel local storage del browser
-      //localStorage.setItem("user",JSON.stringify(user));
 
       // salva l'oggetto user nel session storage e quindi quando l'utente chiude il browser il valore salvato è eliminato
       sessionStorage.setItem("user",JSON.stringify(user));
-      //console.log (JSON.stringify(user));
+    }
+
+    /**
+     * Pone a NULL la variabile di stato User per forzare il Rendering
+     * Rimuove dal Session Storage l'oggetto "user"
+     * 
+     */
+    const assignDataForLogout = () => {
+      setUser(null);
+      sessionStorage.removeItem("user");
     }
 
     const isUserAutheticated = () => {
@@ -65,7 +73,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
 
     return (
-      <AuthContext.Provider value={{ user,assignDataForAuthentication,isUserAutheticated}}>
+      <AuthContext.Provider value={{ user,assignDataForAuthentication,assignDataForLogout,isUserAutheticated}}>
         {children}
       </AuthContext.Provider>
     );

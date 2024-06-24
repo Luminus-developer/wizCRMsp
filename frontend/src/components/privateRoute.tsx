@@ -1,16 +1,28 @@
-import { ReactNode } from 'react';
-import { redirect  } from 'react-router-dom';
+import { ReactNode,useContext } from 'react';
+import Login from "../pages/login";
+
+import {AuthContext} from './../context/authContext.tsx';
 
 interface PrivateRouteProps {
     component: ReactNode;
-    isAuthenticated: boolean;
   }
   
-  function PrivateRoute({component,isAuthenticated}:PrivateRouteProps ) {
+  function PrivateRoute({component}:PrivateRouteProps ) {
+
+    const authContext = useContext(AuthContext);
+
+    let isAuthenticated : boolean = false;
+    if (authContext != null) {
+      isAuthenticated = authContext.isUserAutheticated();
+    }
+
     return (
-            <>
-              {isAuthenticated ? component : redirect("/login")}
-            </>
+      <>
+          {isAuthenticated 
+            ?  <>{component}</>
+            :  <><Login/></>
+          }           
+      </>
     );
   }
 
