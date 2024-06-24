@@ -37,14 +37,10 @@ function App() {
           <MainTemplate>
               <Routes>
                   <Route path="/"
-                    element={<PrivateRoute 
-                                isAuthenticated={isUserAutheticated} 
-                                component={<DashBoard/>}/>}
+                    element={<PrivateRoute component={<DashBoard/>} isAuthenticated={isUserAutheticated}/>}
                   />
                   <Route path="/dashboard"
-                    element={<PrivateRoute 
-                                isAuthenticated={isUserAutheticated} 
-                                component={<DashBoard/>}/>}
+                    element={<PrivateRoute component={<DashBoard/>} isAuthenticated={isUserAutheticated}/>}
                   />
               </Routes>
           </MainTemplate>
