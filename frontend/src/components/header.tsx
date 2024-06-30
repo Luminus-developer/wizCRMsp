@@ -53,6 +53,8 @@ function Header() {
   };
 
   return (
+
+    /*
     <AppBar>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -104,8 +106,7 @@ function Header() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
+                sx={{ my: 2, color: 'white', display: 'block' }}>
                 {page}
               </Button>
             ))}
@@ -142,6 +143,8 @@ function Header() {
         </Toolbar>
       </Container>
     </AppBar>
+    */
+   <><div className='header'>Header wixCRM</div></>
   );
 }
 

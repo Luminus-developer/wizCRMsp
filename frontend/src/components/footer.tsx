@@ -1,19 +1,17 @@
-import AppBar from '@mui/material/AppBar';
-import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
+import { Toolbar, Typography } from '@mui/material';
+import { red } from '@mui/material/colors';
 
 function Footer() {
-
   return (
-    <AppBar position='relative'>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
 
+        /*
+        <Toolbar sx={{border:1,width:'100%'}}>
+          <Typography>WizCRM Copyright 2024</Typography>
         </Toolbar>
-      </Container>
-    </AppBar>
-  );
+        */
 
+        <><div className='footer'>Footer wizCRM Copyright 2024</div></>
+  );
 }
 
 export default Footer;

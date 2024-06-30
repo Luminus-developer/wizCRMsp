@@ -1,32 +1,45 @@
-import {ReactNode,useContext } from "react";
+import { ReactNode, useContext } from "react";
 import Header from "../components/header"
 import Footer from "../components/footer"
 import SideMenu from "../components/sideMenu";
 import Login from "../pages/login";
 
-import {AuthContext} from './../context/authContext.tsx';
+import { AuthContext } from './../context/authContext.tsx';
+
+import CssBaseline from '@mui/material/CssBaseline';
 
 type MainTemplateProps = {
-  children : ReactNode;
+  children: ReactNode;
 }
 
-function MainTemplate({children}:MainTemplateProps ) {
+function MainTemplate({ children }: MainTemplateProps) {
 
   const authContext = useContext(AuthContext);
 
-  let isAuthenticated : boolean = false;
+  let isAuthenticated: boolean = false;
   if (authContext != null) {
     isAuthenticated = authContext.isUserAutheticated();
-    console.log("MainTempalte: "+isAuthenticated);
+    console.log("MainTempalte: " + isAuthenticated);
   }
 
   return (
-      <>
-        {isAuthenticated 
-          ?  <><Header/> <SideMenu/><center>{children}</center> <Footer/></>
-          :  <><Login/></>
-        } 
-      </>
+    <>
+      {isAuthenticated
+        ? <>
+            <div className="App">
+              <Header/>
+              <div className="container">
+                  <SideMenu />
+                  <div className="main">
+                      {children}
+                  </div>
+              </div>
+              <Footer/>
+            </div>
+        </>
+        : <><Login /></>
+      }
+    </>
   );
 }
 

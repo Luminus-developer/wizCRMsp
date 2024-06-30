@@ -2,7 +2,7 @@ function SideMenu() {
 
     return (
         <>
-          <center>Side Menu</center>
+          <div className="drawer">Side Menu</div>
         </>
     );
   

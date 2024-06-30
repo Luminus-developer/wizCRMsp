@@ -1,8 +1,32 @@
-
-#root {
-  margin: 0 auto;
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
+.container {
+  display: flex;
+  flex-direction: row;
+  min-height: 96vh;
+}
+
+.drawer {
+  background: #69a849;
+  flex:0.50;
+}
+
+.header {
+  background: yellowgreen;
+}
+
+.footer {
+  background: yellowgreen;
+}
+
+.main {
+  flex: 1;
+  background: #0e723b;
+}
 
 .logo {
   height: 6em;
@@ -17,10 +41,4 @@
 .logoApp {
   height: 15%;
   width: 15%;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
 }

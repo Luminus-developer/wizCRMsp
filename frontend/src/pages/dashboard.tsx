@@ -44,9 +44,9 @@ function DashBoard() {
     return <Navigate replace to="/login" />;
   } else {
     return (
-      <div>
-        <p>Welcome to your Dashboard</p>
-      </div>
+      <>
+        Welcome to your Dashboard
+      </>
     );
   }
 }
