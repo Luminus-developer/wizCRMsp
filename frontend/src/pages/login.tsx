@@ -172,13 +172,15 @@ function Login() {
     return (
            <>
                 <ThemeProvider theme={defaultTheme}>
-                    <Container component="main" maxWidth="xs">
+                    <Container component="main" maxWidth="xs" sx={{border:0}}>
                         <CssBaseline />
                         <Box
                             sx={{
                                 border:0,
                                 display: 'flex',
                                 flexDirection: 'column',
+                                height:'100vh',
+                                justifyContent:'center',
                                 alignItems: 'center'
                             }}>
 

@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 
 import {AuthContext} from './../context/authContext.tsx';
 import {User} from '../dto/user.tsx';
+import Box from "@mui/material/Box";
 
 //import Cookies from 'js-cookie';
 
@@ -45,7 +46,17 @@ function DashBoard() {
   } else {
     return (
       <>
-        Welcome to your Dashboard
+         <Box
+                sx={{
+                  border:0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height:'96vh',
+                  justifyContent:'center',
+                  alignItems: 'center'
+              }}>            
+                  DashBoard
+            </Box>
       </>
     );
   }

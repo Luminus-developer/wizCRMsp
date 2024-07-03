@@ -12,7 +12,7 @@
 
 .drawer {
   background: #69a849;
-  flex:0.50;
+  flex-grow:0.2;
 }
 
 .header {
@@ -24,7 +24,7 @@
 }
 
 .main {
-  flex: 1;
+  flex-grow: 1;
   background: #0e723b;
 }
 

@@ -54,16 +54,20 @@ function Header() {
 
   return (
 
-    /*
+    <>    
     <AppBar>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
 
-        <Box>
+        <Box sx={{display:'flex',flexDirection:'row',border:1}}>
+          <Box>
           <a title='wizCRM' href="https://it.wikipedia.org/wiki/Ovibos_moschatus" target="_blank">
-            <img src={wizCRMLogo} className="logoApp"/>
+            <img src={wizCRMLogo}/>
           </a>
+          </Box>
+          <Box>
           wizCRM
+          </Box>
         </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -143,8 +147,7 @@ function Header() {
         </Toolbar>
       </Container>
     </AppBar>
-    */
-   <><div className='header'>Header wixCRM</div></>
+    </>    
   );
 }
 

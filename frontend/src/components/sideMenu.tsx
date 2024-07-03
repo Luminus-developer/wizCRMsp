@@ -1,8 +1,23 @@
+import Box from "@mui/material/Box";
+
 function SideMenu() {
 
     return (
         <>
-          <div className="drawer">Side Menu</div>
+          <div className="drawer">
+
+            <Box
+                sx={{
+                  border:0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height:'96vh',
+                  justifyContent:'center',
+                  alignItems: 'center'
+              }}>            
+                  Side menù
+            </Box>
+          </div>
         </>
     );
   
