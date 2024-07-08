@@ -16,7 +16,7 @@
 }
 
 .header {
-  background: yellowgreen;
+  /*background: yellowgreen;*/
 }
 
 .footer {
@@ -39,6 +39,7 @@
 }
 
 .logoApp {
-  height: 15%;
-  width: 15%;
+  height: 3em;
+  will-change: filter;
+  transition: filter 300ms;
 }
