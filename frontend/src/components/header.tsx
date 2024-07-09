@@ -14,7 +14,8 @@ import wizCRMLogo from '../assets/wizCRM_app_logo.png'
 import createTheme from '@mui/material/styles/createTheme';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import TextField from '@mui/material/TextField';
-import { green } from '@mui/material/colors';
+import { alpha } from '@mui/material/styles';
+import SearchIcon from '@mui/icons-material/Search';
 
 /**
  * La voce di menù Contacts conterrà i seguenti sotto menù: Leads, Prospetcs e Customers
@@ -56,27 +57,27 @@ function Header() {
     <> 
 
     <ThemeProvider theme={defaultTheme}>   
-      <AppBar color='transparent'> 
+      <AppBar> 
           <Toolbar disableGutters>
-            <Box sx={{display:'flex',flexDirection:'row', justifyContent:'flex-start',alignItems:'center',flexGrow:0.5,border:1}}>
+            <Box sx={{display:'flex',flexDirection:'row', justifyContent:'flex-start',alignItems:'center',flexGrow:0.5,border:0}}>
               <a title='wizCRM' href="https://it.wikipedia.org/wiki/Ovibos_moschatus" target="_blank">
                 <img src={wizCRMLogo} className="logoApp" alt="WizCRM" />
               </a>
               <Typography variant="h6">
-                    <Box sx={{ fontWeight: 'bold', color:"black"  }}>wizCRM</Box>
+                    <Box sx={{ fontWeight: 'bold'}}>wizCRM</Box>
               </Typography>
             </Box>
             <Box sx={{flexGrow:2}}>
-              <Box sx={{display:'flex',flexDirection:'row',justifyContent:'center',border:1}}>
+              <Box sx={{display:'flex',flexDirection:'row',justifyContent:'center',border:0}}>
                 <TextField
                   color='primary'
-                  variant="outlined"
                   id="search"
                   name="search"
+                  sx={{backgroundColor: alpha(defaultTheme.palette.common.white, 0.15),borderRadius: defaultTheme.shape.borderRadius}}
                 />              
               </Box>
             </Box>
-            <Box sx={{display:'flex',flexDirection:'row',border:1, justifyContent:'flex-end',flexGrow:1 }}>
+            <Box sx={{display:'flex',flexDirection:'row',border:0, justifyContent:'flex-end',flexGrow:1,marginRight:'2em' }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />

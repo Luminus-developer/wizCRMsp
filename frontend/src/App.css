@@ -7,7 +7,7 @@
 .container {
   display: flex;
   flex-direction: row;
-  min-height: 96vh;
+  min-height: 99vh;
 }
 
 .drawer {
@@ -20,7 +20,7 @@
 }
 
 .footer {
-  background: yellowgreen;
+  /*background: yellowgreen;*/
 }
 
 .main {

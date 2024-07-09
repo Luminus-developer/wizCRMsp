@@ -1,16 +1,15 @@
-import { Toolbar, Typography } from '@mui/material';
-import { red } from '@mui/material/colors';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 function Footer() {
   return (
-
-        /*
-        <Toolbar sx={{border:1,width:'100%'}}>
-          <Typography>WizCRM Copyright 2024</Typography>
-        </Toolbar>
-        */
-
-        <><div className='footer'>Footer wizCRM Copyright 2024</div></>
+        <>
+          <Box sx={{backgroundColor:"#1976d2",color:'white',display:'flex',direction:'row',justifyContent:"center" }}>
+                <Typography>
+                      <Box sx={{ fontWeight: 'bold'}}>wizCRM --- Copyright 2024</Box>
+                </Typography>
+          </Box>        
+        </>
   );
 }
 
