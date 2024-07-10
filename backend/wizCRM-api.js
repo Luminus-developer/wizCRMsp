@@ -48,6 +48,7 @@ app.get('/login', (req, res) => {
         let userData = {
             token : tokenBase64,
             userName: "admin",
+            role: "admin",
             language: "en",
             company: "101",
             tokenTimeout: 900  // Validità del Token espressa in secondi
