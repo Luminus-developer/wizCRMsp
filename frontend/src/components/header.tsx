@@ -9,21 +9,24 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
 import React from 'react';
+import { useState,useRef } from 'react';
 
 import wizCRMLogo from '../assets/wizCRM_app_logo.png'
 import createTheme from '@mui/material/styles/createTheme';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import TextField from '@mui/material/TextField';
 import { alpha } from '@mui/material/styles';
+import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
+import ClearIcon from "@mui/icons-material/Clear";
+
+import { deepOrange, deepPurple } from '@mui/material/colors';
 
 /**
  * La voce di menù Contacts conterrà i seguenti sotto menù: Leads, Prospetcs e Customers
  * Tutte le etichette devono essere tradotte in varie lingue
  * 
  */
-
-const contactsPages = ['Leads','Prospects','Customers']; // Trovare il modo per Aggiungere queste voci sotto il pulsante "Contacts"
 
 // Voci del submenù dell'immagine dell'utente collegato
 const settings = ['Profile', 'Dashboard', 'Logout'];
@@ -34,22 +37,43 @@ function Header() {
 
   // Aggiungere codice per gestire gli eventi
 
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  //const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
+  const [showClearIcon, setShowClearIcon] = useState("none");
+  /*
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
+  */
+
+  
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
+  /*
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+  */
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setShowClearIcon(event.target.value === "" ? "none" : "flex");
+  };
+
+  const valueClearIconSearchTestRef = useRef<HTMLInputElement | null>(null)
+
+  const handleCancelSearchClick = (): void => {
+    if (valueClearIconSearchTestRef.current != null)
+      valueClearIconSearchTestRef.current.value = "";
+
+    setShowClearIcon("none");
   };
 
   return (                                                                                                                                                                                                                                                                                                   
@@ -68,19 +92,39 @@ function Header() {
               </Typography>
             </Box>
             <Box sx={{flexGrow:2}}>
-              <Box sx={{display:'flex',flexDirection:'row',justifyContent:'center',border:0}}>
+              <Box sx={{display:'flex',flexDirection:'row',justifyContent:'start',border:0}}>
                 <TextField
+                  inputRef={valueClearIconSearchTestRef}
                   color='primary'
+                  variant='outlined'
                   id="search"
                   name="search"
-                  sx={{backgroundColor: alpha(defaultTheme.palette.common.white, 0.15),borderRadius: defaultTheme.shape.borderRadius}}
+                  fullWidth={true}
+                  sx={{backgroundColor: alpha(defaultTheme.palette.common.white, 0.15),marginLeft:1}}
+                  onChange={handleChange}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position='start'>
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                    endAdornment: (
+                      <InputAdornment
+                        position="end"
+                        style={{ display: showClearIcon }}
+                        onClick={handleCancelSearchClick}
+                      >
+                        <ClearIcon />
+                      </InputAdornment>
+                    )
+                  }}
                 />              
               </Box>
             </Box>
             <Box sx={{display:'flex',flexDirection:'row',border:0, justifyContent:'flex-end',flexGrow:1,marginRight:'2em' }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar sx={{ bgcolor: deepOrange[500] }}>SG</Avatar>
                 </IconButton>
               </Tooltip>
               <Menu
