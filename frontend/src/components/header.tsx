@@ -19,8 +19,9 @@ import { alpha } from '@mui/material/styles';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from "@mui/icons-material/Clear";
+import MenuIcon from '@mui/icons-material/Menu';
 
-import { deepOrange, deepPurple } from '@mui/material/colors';
+import { deepOrange } from '@mui/material/colors';
 
 /**
  * La voce di menù Contacts conterrà i seguenti sotto menù: Leads, Prospetcs e Customers
@@ -76,79 +77,90 @@ function Header() {
     setShowClearIcon("none");
   };
 
-  return (                                                                                                                                                                                                                                                                                                   
+  console.log("Rendering Header...");
 
+  return (                                                                                                                                                                                                                                                                                                   
     <> 
 
     <ThemeProvider theme={defaultTheme}>   
       <AppBar> 
           <Toolbar disableGutters>
-            <Box sx={{display:'flex',flexDirection:'row', justifyContent:'flex-start',alignItems:'center',flexGrow:0.5,border:0}}>
-              <a title='wizCRM' href="https://it.wikipedia.org/wiki/Ovibos_moschatus" target="_blank">
-                <img src={wizCRMLogo} className="logoApp" alt="WizCRM" />
-              </a>
-              <Typography variant="h6">
-                    <Box sx={{ fontWeight: 'bold'}}>wizCRM</Box>
-              </Typography>
-            </Box>
-            <Box sx={{flexGrow:2}}>
-              <Box sx={{display:'flex',flexDirection:'row',justifyContent:'start',border:0}}>
-                <TextField
-                  inputRef={valueClearIconSearchTestRef}
-                  color='primary'
-                  variant='outlined'
-                  id="search"
-                  name="search"
-                  fullWidth={true}
-                  sx={{backgroundColor: alpha(defaultTheme.palette.common.white, 0.15),marginLeft:1}}
-                  onChange={handleChange}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position='start'>
-                        <SearchIcon />
-                      </InputAdornment>
-                    ),
-                    endAdornment: (
-                      <InputAdornment
-                        position="end"
-                        style={{ display: showClearIcon }}
-                        onClick={handleCancelSearchClick}
-                      >
-                        <ClearIcon />
-                      </InputAdornment>
-                    )
-                  }}
-                />              
+             <Box sx={{display:'flex',flexDirection:'row', justifyContent:'space-between',border:0,width:'100vw'}}>
+              <Box sx={{display:'flex',flexDirection:'row',alignItems:'center',border:0}}>
+                <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ marginLeft:'5px'}}
+                  >
+                    <MenuIcon />
+                  </IconButton>
+
+                <a title='wizCRM' href="https://it.wikipedia.org/wiki/Ovibos_moschatus" target="_blank">
+                  <img src={wizCRMLogo} className="logoApp" alt="WizCRM" />
+                </a>
+                <Typography variant="h6">
+                      <Box sx={{ fontWeight: 'bold'}}>wizCRM</Box>
+                </Typography>
               </Box>
-            </Box>
-            <Box sx={{display:'flex',flexDirection:'row',border:0, justifyContent:'flex-end',flexGrow:1,marginRight:'2em' }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar sx={{ bgcolor: deepOrange[500] }}>SG</Avatar>
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
+              <Box sx={{display:'flex',flexDirection:'row',border:0,flexGrow:0.5, alignItems:'center'}}>
+                  <TextField
+                    inputRef={valueClearIconSearchTestRef}
+                    color='primary'
+                    variant='outlined'
+                    id="search"
+                    name="search"
+                    fullWidth={true}
+                    sx={{backgroundColor: alpha(defaultTheme.palette.common.white, 0.15),marginLeft:0}}
+                    onChange={handleChange}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position='start'>
+                          <SearchIcon />
+                        </InputAdornment>
+                      ),
+                      endAdornment: (
+                        <InputAdornment sx={{padding:0,margin:0}}
+                          position="end"
+                          style={{ display: showClearIcon }}
+                          onClick={handleCancelSearchClick}
+                        >
+                          <ClearIcon />
+                        </InputAdornment>
+                      )
+                    }}
+                  />
+              </Box>
+              <Box sx={{display:'flex',flexDirection:'row',border:0,marginRight:'0em' }}>
+                  <Tooltip title="Open settings">
+                    <IconButton onClick={handleOpenUserMenu}>
+                      <Avatar sx={{ bgcolor: deepOrange[500] }}>SG</Avatar>
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: '45px' }}
+                    id="menu-appbar"
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    {settings.map((setting) => (
+                      <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                        <Typography textAlign="center">{setting}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </Box>
+              </Box>
           </Toolbar>
       </AppBar>
       </ThemeProvider>

@@ -2,6 +2,8 @@ import Box from "@mui/material/Box";
 
 function SideMenu() {
 
+  console.log("Rendering SideMenu...");
+
     return (
         <>
           <div className="drawer">
