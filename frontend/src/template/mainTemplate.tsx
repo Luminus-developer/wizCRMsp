@@ -4,9 +4,7 @@ import Footer from "../components/footer"
 import SideMenu from "../components/sideMenu";
 import Login from "../pages/login";
 
-import { AuthContext } from './../context/authContext.tsx';
-
-import CssBaseline from '@mui/material/CssBaseline';
+import { GeneralFunctionContext as GeneraleFunctionContext } from '../context/generalFunctionContext.tsx';
 
 type MainTemplateProps = {
   children: ReactNode;
@@ -14,13 +12,20 @@ type MainTemplateProps = {
 
 function MainTemplate({ children }: MainTemplateProps) {
 
-  const authContext = useContext(AuthContext);
+  const generalFunctionContext = useContext(GeneraleFunctionContext);
 
   let isAuthenticated: boolean = false;
-  if (authContext != null) {
-    isAuthenticated = authContext.isUserAutheticated();
-    console.log("MainTempalte: " + isAuthenticated);
+  if (generalFunctionContext != null) {
+    isAuthenticated = generalFunctionContext.isUserAutheticated();
+    //console.log("MainTempalte: " + isAuthenticated);
   }
+
+  let isDisplaySideBar: boolean = true;
+  if (generalFunctionContext != null) {
+    isDisplaySideBar = generalFunctionContext.isSideBarComponentVisibile();
+  }
+
+  console.log("Rendering MainTemplate...");
 
   return (
     <>
@@ -29,7 +34,7 @@ function MainTemplate({ children }: MainTemplateProps) {
             <div className="App">
               <Header/>
               <div className="container">
-                  <SideMenu />
+                  {isDisplaySideBar ? <SideMenu /> : ""}
                   <div className="main">
                       {children}
                   </div>

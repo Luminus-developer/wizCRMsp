@@ -9,13 +9,13 @@ import DashBoard from './pages/dashboard';
 
 import PrivateRoute from './components/privateRoute';
 
-import { AuthProvider } from './context/authContext';
+import { GeneralFunctionProvider } from './context/generalFunctionContext';
 
 function App() {
 
   return (
     <>
-    <AuthProvider>
+    <GeneralFunctionProvider>
         <BrowserRouter>
           <MainTemplate>
               <Routes>
@@ -28,7 +28,7 @@ function App() {
               </Routes>
           </MainTemplate>
         </BrowserRouter>    
-      </AuthProvider>
+      </GeneralFunctionProvider>
     </>
   )
 }

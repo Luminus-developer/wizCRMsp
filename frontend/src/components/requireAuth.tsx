@@ -1,5 +1,5 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../context/authContext';
+import { useAuth } from '../context/generalFunctionContext';
 
 type RequireAuthProps = {
   children: JSX.Element;

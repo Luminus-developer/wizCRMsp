@@ -8,7 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState,useRef } from 'react';
 
 import wizCRMLogo from '../assets/wizCRM_app_logo.png'
@@ -22,6 +22,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import MenuIcon from '@mui/icons-material/Menu';
 
 import { deepOrange } from '@mui/material/colors';
+import { GeneralFunctionContext } from '../context/generalFunctionContext';
 
 /**
  * La voce di menù Contacts conterrà i seguenti sotto menù: Leads, Prospetcs e Customers
@@ -79,6 +80,18 @@ function Header() {
 
   console.log("Rendering Header...");
 
+  const generalFunctionContext = useContext(GeneralFunctionContext);
+
+
+  const handleDisplaySideBarComponent = () => {
+    if (generalFunctionContext != null) {
+      if (generalFunctionContext.isSideBarComponentVisibile())
+        generalFunctionContext.setDisplaySideBarComponent(false);
+      else 
+        generalFunctionContext.setDisplaySideBarComponent(true);
+    }
+  };
+
   return (                                                                                                                                                                                                                                                                                                   
     <> 
 
@@ -93,6 +106,7 @@ function Header() {
                     color="inherit"
                     aria-label="menu"
                     sx={{ marginLeft:'5px'}}
+                    onClick={() => {handleDisplaySideBarComponent();}}
                   >
                     <MenuIcon />
                   </IconButton>

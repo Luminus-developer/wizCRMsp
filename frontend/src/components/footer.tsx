@@ -3,13 +3,13 @@ import Typography from "@mui/material/Typography";
 
 function Footer() {
 
-  console.log("Rendering Footter...");
+  console.log("Rendering Footer...");
 
   return (
         <>
           <Box sx={{backgroundColor:"#1976d2",color:'white',display:'flex',direction:'row',justifyContent:"center" }}>
-                <Typography>
-                      <Box sx={{ fontWeight: 'bold'}}>wizCRM --- Copyright 2024</Box>
+                <Typography sx={{ fontWeight: 'bold'}}>
+                        wizCRM --- Copyright 2024
                 </Typography>
           </Box>        
         </>

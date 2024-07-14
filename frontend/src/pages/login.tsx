@@ -1,5 +1,5 @@
 import { FormEvent, MouseEvent, useState, useEffect , useContext } from 'react';
-import {AuthContext} from './../context/authContext.tsx';
+import {GeneralFunctionContext} from '../context/generalFunctionContext.tsx';
 import {User} from '../dto/user.tsx';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -33,7 +33,7 @@ const defaultTheme = createTheme();
 
 function Login() {
     // Accede all'oggetto Context dove è disponibile una variabile di stato indicante se l'utente è Autenticato
-    const authContext = useContext(AuthContext);
+    const generalFunctionContext = useContext(GeneralFunctionContext);
 
     const { t, i18n } = useTranslation();
     const [loading, setLoading] = useState(false);
@@ -146,8 +146,8 @@ function Login() {
               */
 
             
-            console.log ("Context:"+authContext); 
-            if (authContext != null) {
+            console.log ("Context:"+generalFunctionContext); 
+            if (generalFunctionContext != null) {
 
                 let user: User;
                 
@@ -157,12 +157,13 @@ function Login() {
                     company: data.result.company,
                     language: data.result.language,
                     tokenTimeout: data.result.tokenTimout,
+                    role: data.result.role,
                 }
                 
 
-                authContext.assignDataForAuthentication(user);
+                generalFunctionContext.assignDataForAuthentication(user);
 
-                console.log("Assign User to Context:"+JSON.stringify(authContext.user));
+                console.log("Assign User to Context:"+JSON.stringify(generalFunctionContext.user));
                 navigate("/dashboard");
             } else 
                 navigate("/login");

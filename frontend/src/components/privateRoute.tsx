@@ -1,7 +1,7 @@
 import { ReactNode,useContext } from 'react';
 import Login from "../pages/login";
 
-import {AuthContext} from './../context/authContext.tsx';
+import {GeneralFunctionContext} from '../context/generalFunctionContext.tsx';
 
 interface PrivateRouteProps {
     component: ReactNode;
@@ -9,7 +9,7 @@ interface PrivateRouteProps {
   
   function PrivateRoute({component}:PrivateRouteProps ) {
 
-    const authContext = useContext(AuthContext);
+    const authContext = useContext(GeneralFunctionContext);
 
     let isAuthenticated : boolean = false;
     if (authContext != null) {

@@ -1,8 +1,7 @@
-import { useEffect, useState,useContext} from "react";
+import { useEffect, useContext} from "react";
 import { Navigate } from 'react-router-dom';
 
-import {AuthContext} from './../context/authContext.tsx';
-import {User} from '../dto/user.tsx';
+import {GeneralFunctionContext} from '../context/generalFunctionContext.tsx';
 import Box from "@mui/material/Box";
 
 //import Cookies from 'js-cookie';
@@ -10,14 +9,14 @@ import Box from "@mui/material/Box";
 function DashBoard() {
   //const [authenticated, setauthenticated] = useState(false); 
 
-  console.log ("DashBoard");
+  console.log ("Rendering DashBoard...");
 
-  const authContext = useContext(AuthContext);
+  const generalFunctionContext = useContext(GeneralFunctionContext);
 
   let auth : boolean = false;
-  if (authContext != null) {
-    auth = authContext.isUserAutheticated();
-    console.log("MainTempalte: "+auth);
+  if (generalFunctionContext != null) {
+    auth = generalFunctionContext.isUserAutheticated();
+    //console.log("MainTempalte: "+auth);
   }
 
   useEffect(() => {
