@@ -7,10 +7,60 @@ const port = 3000;
 
 const OK = 0;
 const WRONG_CREDENTIALS_ERROR = 10;
+const WRONG_USER_ROLE_ERROR = 20;
 
 const cache = new NodeCache();
 
 app.use(cors());
+
+
+app.get('/getMenu',(req, res) => {
+
+    const role = req.query.role;
+
+    let userData = "{}";
+
+    if (role === 'admin') {
+
+        userData={
+           "menu": [
+                    {
+                        id: 'contacts',
+                        label: 'Contacts',
+                        children: [
+                            { id: 'leads', label: 'Leads' },
+                            { id: 'prospects', label: 'Prospects' },
+                            { id: 'customers', label: 'Customers' },
+                          ],
+                    },
+                    {
+                        id: 'sales',
+                        label: 'Sales'
+                    }
+           ]
+        }
+
+        response = {
+            result: userData,
+            error: {
+                code: OK,
+                message: ""
+            }
+         }
+    } else {
+        response = {
+            result: userData,
+            error: {
+                code: WRONG_USER_ROLE_ERROR,
+                message: "Role "+role+" is not valid"
+            }
+         }
+    }
+
+    console.log(response);
+
+    res.send(response);
+});
 
 app.get('/login', (req, res) => {
 

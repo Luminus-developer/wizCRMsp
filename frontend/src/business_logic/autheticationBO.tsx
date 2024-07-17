@@ -26,7 +26,26 @@ export class AuthenticationBO {
             }
         }
         return result;
-    }    
+    }
+    
+    
+    async getAppMenu(role:string) : Promise<ResponseDTO> {
+
+        console.log("BO getAppMenu: "+role);
+
+        let result = new ResponseDTO();
+        try {
+            const response = await axios.get("http://localhost:3000/getMenu?role="+role)
+            result = response.data;
+        } catch (error) {
+            if (error != null && error != undefined) { 
+                console.log(error);
+                result.error = new ErrorDTO(1,JSON.stringify(error, Object.getOwnPropertyNames(error)));
+            }
+        }
+        return result;
+    }
+
 }
 
 
