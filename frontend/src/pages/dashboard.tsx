@@ -1,7 +1,7 @@
 import { useEffect, useContext} from "react";
 import { Navigate } from 'react-router-dom';
 
-import {GeneralFunctionContext} from '../context/generalFunctionContext.tsx';
+import {GeneralContext} from '../context/generalContext.tsx';
 import Box from "@mui/material/Box";
 
 //import Cookies from 'js-cookie';
@@ -11,7 +11,7 @@ function DashBoard() {
 
   console.log ("Rendering DashBoard...");
 
-  const generalFunctionContext = useContext(GeneralFunctionContext);
+  const generalFunctionContext = useContext(GeneralContext);
 
   let auth : boolean = false;
   if (generalFunctionContext != null) {

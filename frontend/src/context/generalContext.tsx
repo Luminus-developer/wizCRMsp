@@ -2,7 +2,7 @@ import { createContext, useState, useContext, ReactNode } from 'react';
 import {User} from '../dto/user.tsx';
 
 // Questa struttura contiene tutti gli attributi e metodi utilizzabili nel Provider del Context
-type GeneralFunctionContextType = {
+type GeneralContextType = {
     user: User | null;
     assignDataForAuthentication (user: User):void;
     assignDataForLogout():void;
@@ -11,7 +11,7 @@ type GeneralFunctionContextType = {
     isSideBarComponentVisibile() : boolean;
 }
 
-export const GeneralFunctionContext = createContext<GeneralFunctionContextType | null>(null);
+export const GeneralContext = createContext<GeneralContextType | null>(null);
 
 type GeneralFunctionProps = {
     children: ReactNode;
@@ -24,18 +24,8 @@ type GeneralFunctionProps = {
  * @returns 
  */
 
-export const GeneralFunctionProvider = ({ children }: GeneralFunctionProps) => {
+export const GeneralProvider = ({ children }: GeneralFunctionProps) => {
     const [user, setUser] = useState<User | null>(null);
-    const [displaySideBar, setDisplaySideBar] = useState<boolean>(true);
-
-
-    const setDisplaySideBarComponent = (display: boolean) => {
-      setDisplaySideBar(display);
-    }
-
-    const isSideBarComponentVisibile = () => {
-      return displaySideBar;
-    }
 
     const assignDataForAuthentication = (user: User) => {
       // Aggiorna lo stato e genera un render
@@ -85,12 +75,12 @@ export const GeneralFunctionProvider = ({ children }: GeneralFunctionProps) => {
     }
 
     return (
-      <GeneralFunctionContext.Provider value={{ user,assignDataForAuthentication,assignDataForLogout,isUserAutheticated,setDisplaySideBarComponent,isSideBarComponentVisibile}}>
+      <GeneralContext.Provider value={{ user,assignDataForAuthentication,assignDataForLogout,isUserAutheticated}}>
         {children}
-      </GeneralFunctionContext.Provider>
+      </GeneralContext.Provider>
     );
   };
   
   export const useAuth = () => {
-    return useContext(GeneralFunctionContext) as GeneralFunctionContextType;
+    return useContext(GeneralContext) as GeneralContextType;
 };

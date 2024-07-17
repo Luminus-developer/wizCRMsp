@@ -1,10 +1,10 @@
-import { ReactNode, useContext } from "react";
-import Header from "../components/header"
-import Footer from "../components/footer"
-import SideMenu from "../components/sideMenu";
-import Login from "../pages/login";
+import { ReactNode, useContext,useState } from "react";
+import Header from "../components/header.tsx"
+import Footer from "../components/footer.tsx"
+import SideMenu from "../components/sideMenu.tsx";
+import Login from "../pages/login.tsx";
 
-import { GeneralFunctionContext as GeneraleFunctionContext } from '../context/generalFunctionContext.tsx';
+import { GeneralContext as GeneraleFunctionContext } from '../context/generalContext.tsx';
 
 type MainTemplateProps = {
   children: ReactNode;
@@ -19,22 +19,23 @@ function MainTemplate({ children }: MainTemplateProps) {
     isAuthenticated = generalFunctionContext.isUserAutheticated();
     //console.log("MainTempalte: " + isAuthenticated);
   }
-
-  let isDisplaySideBar: boolean = true;
-  if (generalFunctionContext != null) {
-    isDisplaySideBar = generalFunctionContext.isSideBarComponentVisibile();
-  }
+ 
+  const [displaySideBarComponent, setDisplaySideBarComponent] = useState(true);
 
   console.log("Rendering MainTemplate...");
+
+  const showSideBarComponentFunction = () => {
+    setDisplaySideBarComponent(!displaySideBarComponent);
+  };
 
   return (
     <>
       {isAuthenticated
         ? <>
             <div className="App">
-              <Header/>
+              <Header showSideBarComponentFunction={showSideBarComponentFunction}  />
               <div className="container">
-                  {isDisplaySideBar ? <SideMenu /> : ""}
+                  {displaySideBarComponent ? <SideMenu /> : ""}
                   <div className="main">
                       {children}
                   </div>

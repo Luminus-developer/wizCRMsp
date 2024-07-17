@@ -1,5 +1,5 @@
 import { FormEvent, MouseEvent, useState, useEffect , useContext } from 'react';
-import {GeneralFunctionContext} from '../context/generalFunctionContext.tsx';
+import {GeneralContext} from '../context/generalContext.tsx';
 import {User} from '../dto/user.tsx';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -33,7 +33,7 @@ const defaultTheme = createTheme();
 
 function Login() {
     // Accede all'oggetto Context dove è disponibile una variabile di stato indicante se l'utente è Autenticato
-    const generalFunctionContext = useContext(GeneralFunctionContext);
+    const generalFunctionContext = useContext(GeneralContext);
 
     const { t, i18n } = useTranslation();
     const [loading, setLoading] = useState(false);

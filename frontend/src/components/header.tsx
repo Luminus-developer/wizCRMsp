@@ -22,7 +22,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import MenuIcon from '@mui/icons-material/Menu';
 
 import { deepOrange } from '@mui/material/colors';
-import { GeneralFunctionContext } from '../context/generalFunctionContext';
+//import { GeneralContext } from '../context/generalContext';
 
 /**
  * La voce di menù Contacts conterrà i seguenti sotto menù: Leads, Prospetcs e Customers
@@ -35,7 +35,7 @@ const settings = ['Profile', 'Dashboard', 'Logout'];
 
 const defaultTheme = createTheme();
 
-function Header() {
+function Header({showSideBarComponentFunction}) {
 
   // Aggiungere codice per gestire gli eventi
 
@@ -80,9 +80,9 @@ function Header() {
 
   console.log("Rendering Header...");
 
-  const generalFunctionContext = useContext(GeneralFunctionContext);
+  //const generalFunctionContext = useContext(GeneralContext);
 
-
+  /*
   const handleDisplaySideBarComponent = () => {
     if (generalFunctionContext != null) {
       if (generalFunctionContext.isSideBarComponentVisibile())
@@ -91,6 +91,7 @@ function Header() {
         generalFunctionContext.setDisplaySideBarComponent(true);
     }
   };
+  */
 
   return (                                                                                                                                                                                                                                                                                                   
     <> 
@@ -106,7 +107,7 @@ function Header() {
                     color="inherit"
                     aria-label="menu"
                     sx={{ marginLeft:'5px'}}
-                    onClick={() => {handleDisplaySideBarComponent();}}
+                    onClick={() => {showSideBarComponentFunction();}}
                   >
                     <MenuIcon />
                   </IconButton>

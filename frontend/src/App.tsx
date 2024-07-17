@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import './App.css'
-import MainTemplate from './template/mainTemplate';
+import MainTemplate from './layout/mainLayout';
 import DashBoard from './pages/dashboard';
 //import Leads from './pages/contacts/leads';
 //import Prospects from './pages/contacts/prospects';
@@ -9,13 +9,13 @@ import DashBoard from './pages/dashboard';
 
 import PrivateRoute from './components/privateRoute';
 
-import { GeneralFunctionProvider } from './context/generalFunctionContext';
+import { GeneralProvider } from './context/generalContext';
 
 function App() {
 
   return (
     <>
-    <GeneralFunctionProvider>
+    <GeneralProvider>
         <BrowserRouter>
           <MainTemplate>
               <Routes>
@@ -28,7 +28,7 @@ function App() {
               </Routes>
           </MainTemplate>
         </BrowserRouter>    
-      </GeneralFunctionProvider>
+      </GeneralProvider>
     </>
   )
 }
