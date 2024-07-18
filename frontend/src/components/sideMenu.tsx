@@ -25,8 +25,7 @@ function SideMenu() {
     const callWebAPI = async () => {
       console.log("SideBasr callWebAPI");
 
-      if (loaded === false) return; // E' l'unico modo per non chiamare più volte la webapi
-
+      if (loaded === true) return; // E' l'unico modo per non chiamare più volte la webapi
 
       let bo:AuthenticationBO = new AuthenticationBO();
       let dataResponse:ResponseDTO = new ResponseDTO();
@@ -50,6 +49,7 @@ function SideMenu() {
 
     // Assegna la struttura del menù al componente grafico
 
+    setLoaded(true); // modificando questo stato sarà richimaato il rendering ma non sarà eseguito lo useEffect
   }
 
   console.log("Rendering SideMenu...");
