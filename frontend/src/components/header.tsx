@@ -35,7 +35,7 @@ const settings = ['Profile', 'Dashboard', 'Logout'];
 
 const defaultTheme = createTheme();
 
-function Header({showSideBarComponentFunction}) {
+function Header({showSideBarComponentFunction = () => {} }) {
 
   // Aggiungere codice per gestire gli eventi
 

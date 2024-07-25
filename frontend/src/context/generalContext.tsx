@@ -7,8 +7,6 @@ type GeneralContextType = {
     assignDataForAuthentication (user: User):void;
     assignDataForLogout():void;
     isUserAutheticated (): boolean;
-    setDisplaySideBarComponent(display:boolean):void;
-    isSideBarComponentVisibile() : boolean;
 }
 
 export const GeneralContext = createContext<GeneralContextType | null>(null);
