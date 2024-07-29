@@ -80,9 +80,7 @@ function SideMenu() {
                   border:0,
                   display: 'flex',
                   flexDirection: 'column',
-                  height:'96vh',
-                  justifyContent:'center',
-                  alignItems: 'center'
+                  height:'96vh'
               }}>            
                   <RichTreeView apiRef={apiRef} items={menuItems} />
             </Box>
