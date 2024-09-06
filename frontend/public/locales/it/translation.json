@@ -1,1 +1,9 @@
-
+{
+    "loginPage": {
+        "email":"Email",
+        "password":"Password",
+        "signIn":"Registrazione",
+        "errorInvalidCredentials":"Credenziali non valide",
+        "errorServerError":"Errore nel Servizio di Login (per favore controllare il log)"
+    }
+}
